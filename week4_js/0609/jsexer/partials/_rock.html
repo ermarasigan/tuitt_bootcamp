@@ -1,0 +1,180 @@
+<!-- (Game) Rock Paper Scissors -->
+
+	<h1 id="rock-msg">Una'y bato.</h1>
+
+	<figure id="ai-rock">
+		<img src="images/rock.jpg" alt="rock">
+	</figure>
+
+	<figure id="ai-paper">
+		<img src="images/paper.jpg" alt="paper">
+	</figure>
+
+	<figure id="ai-scissors">
+		<img src="images/scissors.jpg" alt="scissors">
+	</figure>
+
+	<figure>
+		<a id = "user-rock" href="#">
+			<img src="images/rock2.jpg" alt="rock2">
+		</a>
+		<a id = "user-paper" href="#">
+			<img src="images/paper2.jpg" alt="paper2">
+		</a>
+		<a id = "user-scissors" href="#">
+			<img src="images/scissors2.jpg" alt="scissors2">
+		</a>	
+		
+	</figure>
+
+	<button id="bato"> Bato Bato Pick! </button>
+
+	<script type="text/javascript">
+		var aihand = ' ';
+		var userhand = ' ';
+		var score=0;
+
+		var airock = document.getElementById('ai-rock');
+		var aipaper = document.getElementById('ai-paper');
+		var aiscissors = document.getElementById('ai-scissors');
+		var userrock = document.getElementById('user-rock');
+		var userpaper = document.getElementById('user-paper');
+		var userscissors = document.getElementById('user-scissors');
+		var rockmsg = document.getElementById('rock-msg');
+
+		var bato = document.getElementById('bato');
+			bato.addEventListener("click",batopick)
+
+		function batopick() {
+			var random = Math.floor((Math.random()*3) + 1);
+			switch (random) {
+				case 1: 
+					aihand="rock";
+					break;
+				case 2:
+					aihand="paper";
+					break;
+				case 3:
+					aihand="scissors";
+					break;
+				default:
+			}
+			console.log(random);
+			console.log(aihand);
+			userrock.style.display = "inline-block";
+			userpaper.style.display = "inline-block";
+			userscissors.style.display = "inline-block";
+			aipaper.style.display = "none";
+			aiscissors.style.display = "none";
+			airock.style.display = "block";
+		}
+
+		var userock = document.getElementById('user-rock');
+			userock.addEventListener("click",pickrock)
+
+		function pickrock() {
+			userrock.style.display = "block";
+			userpaper.style.display = "none";
+			userscissors.style.display = "none";
+
+			switch (aihand) {
+				case "rock":
+					airock.style.display = "block";
+					aipaper.style.display = "none";
+					aiscissors.style.display = "none";
+					rockmsg.innerHTML='Tabla!'
+						+ ' (Score: ' + score + ')';
+					break;
+				case "paper":
+					airock.style.display = "none";
+					aiscissors.style.display = "none";
+					aipaper.style.display = "block";
+					score--;
+					rockmsg.innerHTML='Talo ka! Loser!'
+						+ ' (Score: ' + score + ')';
+					break;
+				case "scissors":
+					airock.style.display = "none";
+					aipaper.style.display = "none";
+					aiscissors.style.display = "block";
+					score++;
+					rockmsg.innerHTML='Nanalo ka! Edi wow!'
+						+ ' (Score: ' + score + ')';
+					break;
+				default:
+			}
+		}
+
+		var usepaper = document.getElementById('user-paper');
+			usepaper.addEventListener("click",pickpaper)
+
+		function pickpaper() {
+			userrock.style.display = "none";
+			userpaper.style.display = "block";
+			userscissors.style.display = "none";
+
+			switch (aihand) {
+				case "rock":
+					airock.style.display = "block";
+					aipaper.style.display = "none";
+					aiscissors.style.display = "none";
+					score++;
+					rockmsg.innerHTML='Nanalo ka! Edi wow!'
+						+ ' (Score: ' + score + ')';
+					break;
+				case "paper":
+					airock.style.display = "none";
+					aiscissors.style.display = "none";
+					aipaper.style.display = "block";
+					rockmsg.innerHTML='Tabla!'
+						+ ' (Score: ' + score + ')';
+					break;
+				case "scissors":
+					airock.style.display = "none";
+					aipaper.style.display = "none";
+					aiscissors.style.display = "block";
+					score--;
+					rockmsg.innerHTML='Talo ka! Loser!'
+						+ ' (Score: ' + score + ')';
+					break;
+				default:
+			}
+		}
+
+		var usescissors = document.getElementById('user-scissors');
+			usescissors.addEventListener("click",pickscissors)
+
+		function pickscissors() {
+			userrock.style.display = "none";
+			userpaper.style.display = "none";
+			userscissors.style.display = "block";
+
+			switch (aihand) {
+				case "rock":
+					airock.style.display = "block";
+					aipaper.style.display = "none";
+					aiscissors.style.display = "none";
+					score--;
+					rockmsg.innerHTML='Talo ka! Loser!'
+						+ ' (Score: ' + score + ')';
+					break;
+				case "paper":
+					airock.style.display = "none";
+					aiscissors.style.display = "none";
+					aipaper.style.display = "block";
+					score++;
+					rockmsg.innerHTML='Nanalo ka! Edi wow!'
+						+ ' (Score: ' + score + ')';
+					break;
+				case "scissors":
+					airock.style.display = "none";
+					aipaper.style.display = "none";
+					aiscissors.style.display = "block";
+					rockmsg.innerHTML='Tabla!'
+						+ ' (Score: ' + score + ')';
+					break;
+				default:
+			}
+		}
+	</script>
+

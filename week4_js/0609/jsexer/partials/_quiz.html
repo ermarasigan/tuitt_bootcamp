@@ -1,0 +1,62 @@
+<!-- (Game) Take a trivia quiz -->
+
+	<h1 id="quiz-text"> Quiz time! </h1>
+
+	<input id="quiz-answer" type="text" ></input>
+	<button id="quiz-start" type="submit" >Start</button>
+
+	<script type="text/javascript">
+		var questions=[null,
+			'What is the longest word?',
+			'Where is the capital of Finland?',
+			'Who is the bride of goblin?',
+			'Why do birds suddenly appear?',
+			'When was the Philippine declaration of independence?'];
+		var answers=[null,
+			'pneumonoultramicroscopicsilicovolcanoconiosis',
+			'helsinki',
+			'Ji Eun Tak',
+			'everytime you are near',
+			'June 12, 1898'];
+		var c=0;
+		var i=1;
+
+		var start=document.getElementById('quiz-start')
+		start.addEventListener("click",questionnaire);
+
+		var input=document.getElementById('quiz-answer')
+
+		input.addEventListener("keydown", function(e){
+			if (e.keyCode === 13) {
+				questionnaire();
+			}
+		});
+
+		function questionnaire(){
+			if (i<=5){		
+				
+				document.getElementById('quiz-text').innerHTML = questions[i];
+				document.getElementById('quiz-answer').style.display = "inline";
+				document.getElementById('quiz-start').innerHTML = "Next";
+				var answer=document.getElementById('quiz-answer').value.toLowerCase();					
+				if (answer == answers[i-1]) {
+					++c;
+				}
+				document.getElementById('quiz-answer').value = '';
+				document.getElementById('quiz-answer').focus();
+				++i;
+
+			} else {
+				var answer=document.getElementById('quiz-answer').value;	
+				if (answer == answers[i-1]) {
+					++c;
+				}
+				document.getElementById('quiz-text').innerHTML = "Correct answers: " + c;
+				document.getElementById('quiz-answer').style.display = "none";
+				document.getElementById('quiz-start').innerHTML = "Restart quiz";
+				i=1;
+				c=0;
+			}
+		}
+
+	</script>

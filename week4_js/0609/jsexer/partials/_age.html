@@ -1,0 +1,44 @@
+<!-- (Game) What age will you marry -->
+
+	<h1>What age will you marry?</h1>
+
+	<input id="age-inp" type="number" placeholder="Guess"></input>
+	<button id="age-btn">Check</button>
+
+	<h3 id="age-msg" class="message"></h3>
+
+	<script type="text/javascript">
+		var random = Math.floor((Math.random()*10) + 26);
+
+		var button=document.getElementById('age-btn')
+		button.addEventListener("click",agecheck)
+
+		document.getElementById('age-inp')
+		.addEventListener("keydown", function(e){
+			if ((e.keyCode) === 13) {
+				agecheck();
+			}
+		});
+
+		function agecheck() {
+			var msg = document.getElementById('age-msg');
+			msg.style.display = "block";
+
+			var guess = parseInt(document.getElementById('age-inp').value);
+			if (guess > random) {
+				msg.innerHTML = 
+				'LOWER THAN ' + guess;
+			} else if (guess < random) {
+				msg.innerHTML = 
+				'HIGHER THAN ' + guess;
+			} else if (guess > 0) {
+				msg.innerHTML = 
+				'CORRECT! You will marry at ' + guess;
+			} else {
+				msg.innerHTML = 
+				'Please type a number';
+			}
+			document.getElementById('age-inp').value = '';
+			document.getElementById('age-inp').focus();
+		}
+	</script>

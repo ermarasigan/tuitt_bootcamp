@@ -1,0 +1,49 @@
+<!-- (Game) Generate a Pascal's triangle -->
+
+	<h1> Pascals Triangle </h1>
+	<input id="pascal-inp" type="text" placeholder="How many layers?"></input>
+	<button id="pascal-btn">Pascal</button>
+	<h3 id="pascal-msg" class="message"></h3>
+
+	<script type="text/javascript">
+		var button=document.getElementById('pascal-btn')
+			button.addEventListener("click",pascalcheck)
+
+		var input=document.getElementById('pascal-inp')
+			input.addEventListener("keydown", function(e){
+			if (e.keyCode === 13) {
+				pascalcheck();
+			}
+		});
+
+		function pascalcheck() {
+			var msg = document.getElementById('pascal-msg');
+			msg.style.display = "block";
+
+			var n = [0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+			var input = parseInt(document.getElementById('pascal-inp').value);
+
+			if (input <= 0) {
+				msg.innerHTML = 'Please input a number';
+
+			} else if (input <= 10) {
+				msg.innerHTML = '';
+				for(i=1; i<=input; i++){
+					for(j=i; j>=1; j--){
+						// n[j+1]=0;
+						n[j]=n[j]+n[j-1];
+					}
+					for(k=1; k<=i; k++){
+						msg.innerHTML += 
+						'<div class="salmon">' + n[k] + '</div>';
+					}
+					msg.innerHTML += '<br>';
+				}
+
+			} else {
+				msg.innerHTML = 'Please input a number lower than 11';
+			}
+			document.getElementById('pascal-inp').value = '';
+			document.getElementById('pascal-inp').focus();
+		}
+	</script>

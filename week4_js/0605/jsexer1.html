@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>JS Exercise 1</title>
+
+	<!-- jQuery library -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</head>
+<body>
+
+	<h1>What can Javascript do?</h1>
+	
+	<hr>
+	<h2> Javascript can hide/show HTML elements </h2>
+
+	<button id='hideBtn' onclick="hide_test()">
+		Hide All
+	</button>
+
+	<button id='showBtn' onclick="show_test()">
+		Show All
+	</button>
+
+	<p id='showtext'>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+	tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+	quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+	consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+	cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+	proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+
+	<script type="text/javascript">
+		function hide_test() {
+			document.getElementById('showtext').style.display="none";
+		}
+	</script>
+
+	<script type="text/javascript">
+		function show_test() {
+			document.getElementById('showtext').style.display="block";
+		}
+	</script>
+
+	<hr>
+	<h2> Javascript can change HTML elements </h2>
+
+	<button id='changeBtn' onclick="change_test()">
+		Change Button
+	</button>
+
+	<p id="changetext">Hello World</p>
+
+	<script type="text/javascript">
+		function change_test() {
+			document.getElementById('changetext').innerHTML="Expeliarmus";
+		}
+	</script>
+
+	<hr>
+	<h2> Javascript can change HTML elements </h2>
+
+	<button id='changeHeightbtn' onclick="changeImgHeight()">
+		Change Image Height
+	</button>
+
+	<button id='changeImgbtn' onclick="changeImg()">
+		Change Image
+	</button>
+
+	<figure>
+		<img id='testimage' src="images/pulag3.jpg" height="200px">
+	</figure>
+	
+	<script type="text/javascript">
+		function changeImgHeight() {
+			// document.getElementById('testimage').setAttribute("height","100px");
+			// document.getElementById('testimage').height="100";
+			$('#testimage').attr('height',100)
+		}
+	</script>
+
+	<script type="text/javascript">
+		function changeImg() {
+			document.getElementById('testimage').setAttribute("src","images/pulag4.jpg");
+		}
+	</script>
+
+	<script type="text/javascript">
+		$('#testimage').mouseover( function(){
+			$('#testimage').attr({
+				'height':100,
+				'src':'images/pulag4.jpg'
+			});
+		});
+		$('#testimage').mouseleave( function(){
+			$('#testimage').attr({
+				'height':200,
+				'src':'images/pulag3.jpg'
+			});
+		});
+	</script>
+
+	<br>
+	<h2 id='changestyle' onmouseover="changestyle()" onmouseleave="revertstyle()"> Javascript can change HTML styles (CSS) </h2>
+
+	<!-- <button id="changex" onclick="changestyle()">Change Style</button> -->
+	<button id="changex">Change Style</button>
+
+	<script type="text/javascript">
+		function changestyle() {
+			document.getElementById('changestyle').style.color="blue";
+		}
+	</script>
+
+	<script type="text/javascript">
+		function revertstyle() {
+			document.getElementById('changestyle').style.color="black";
+		}
+	</script>
+
+	<br>
+	<h2 id='helloworld'> Hello </h2>
+
+	<!-- <button id="hellobtn" onclick="hidehello()">Hello</button> -->
+	<button id="hellobtn">Hello</button>
+
+	<!-- <button id="worldbtn" onclick="hideworld()">World</button> -->
+	<button id="worldbtn">World</button>
+
+	<script type="text/javascript">
+		// function hideworld() {
+		// 	document.getElementById('worldbtn').style.display="none";
+		// 	document.getElementById('hellobtn').style.display="block";
+		// 	document.getElementById('helloworld').innerHTML="World";
+		// }
+		$('#worldbtn').click( function(){
+			$('#worldbtn').hide()
+			$('#hellobtn').show()
+			$('#helloworld').html("World")
+		});
+	</script>
+
+	<script type="text/javascript">
+		// function hidehello() {
+		// 	document.getElementById('hellobtn').style.display="none";
+		// 	document.getElementById('worldbtn').style.display="block";
+		// 	document.getElementById('helloworld').innerHTML="Hello";
+		// }
+		$('#hellobtn').click( function(){
+			$('#hellobtn').hide()
+			$('#worldbtn').show()
+			$('#helloworld').html("Hello")
+		});
+	</script>
+
+	<hr>
+	<h2>Javascript can get and manipulate HTML elements</h2>
+
+	<input type="number" id="n1" min=0></input> + 
+	<input type="number" id="n2" min=0></input> = 
+	<span id="sum"></span>
+
+	<br>
+
+	<button id="get_sum">Get Sum</button>
+
+<!-- 	<script type="text/javascript">
+		function get_sum() {
+			document.getElementById('sum').innerHTML=
+			parseInt(document.getElementById('n1').value) + 
+			parseInt(document.getElementById('n2').value);
+			// not advisable (for IE)
+			// sum.innerHTML = 
+			// n1.value + n2.value
+		}		
+	</script> -->
+
+	<script type="text/javascript">
+		// document.getElementById('get_sum').onclick = function(){
+		// 	var n1 = document.getElementById('n1').value;  //string value
+		// 	var n2 = document.getElementById('n2').value;  //string value
+		// 	var int_n1 = parseInt(n1);		//converted typecast to int
+		// 	var int_n2 = parseInt(n2);		//converted typecast to int
+		// 	// alert (int_n1+int_n2);
+		// 	document.getElementById('sum').innerHTML=int_n1+int_n2;
+		// }
+		$('#get_sum').click( function(){
+			var n1 = $('#n1').val();  //string value
+			var n2 = $('#n2').val();  //string value
+			var int_n1 = parseInt(n1);		//converted typecast to int
+			var int_n2 = parseInt(n2);		//converted typecast to int
+			$('#sum').html(int_n1+int_n2);
+		});
+	</script>
+
+	<hr>
+	<button id='showbutton'>Show All</button>
+	<button id='hidebutton'>Hide All</button>
+
+	<div id='test'>
+	<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+	tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+	quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+	consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+	cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+	proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+
+	<script type="text/javascript">
+		document.getElementById('showbutton').onclick = 
+			function(){
+				document.getElementById('test').style.display='block';
+			}
+		document.getElementById('hidebutton').onclick = 
+			function(){
+				document.getElementById('test').style.display='none';
+			}
+	</script>
+
+	<hr>
+	<p class='paragraph'>qwerty</p>
+	<p class='paragraph'>asdfg</p>
+
+	<script type="text/javascript">
+		document.getElementsByClassName('showbutton').onclick = 
+			function(){
+				document.getElementsByClassName('paragraph').style.display='block';
+			}
+		document.getElementsByIClassName'hidebutton').onclick = 
+			function(){
+				document.getElementsByClassName('paragraph').style.display='none';
+			}
+		// iniiwasan
+		// alert(document.getElementsByClassName('paragraph')[1].innerHTML);
+	</script>
+
+	<hr>
+	<button id='showbutton2'>Show All</button>
+	<button id='hidebutton2'>Hide All</button>
+
+	<div id='test2'>
+	<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+	tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+	quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+	consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+	cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+	proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+
+	<script type="text/javascript">
+		// document.getElementById('showbutton2').onclick = 
+		$('#showbutton2').hover(
+			function(){
+				// document.getElementById('test2').style.display='block'
+				$('#test2').show();
+			}
+		);
+		// document.getElementById('hidebutton2').onclick = 
+		// $('#hidebutton2').click(
+		// 	function(){
+				// document.getElementById('test2').style.display='none'
+		// 		$('#test2').hide();
+		// 	}
+		// );
+		$('#hidebutton2').hover( function(){			
+			$('#test2').hide();
+		});
+
+	</script>
+
+	<script type="text/javascript">
+		$('p').mouseover( function(){
+			$(this).css('color', "red")
+		});
+		$('p').mouseleave( function(){
+			$(this).css('color', "black")
+		});
+	</script>
+
+	<button id="button1">1</button>
+<!-- 
+	<script type="text/javascript">
+		$('#get_sum').click( function(){
+			var n1 = $('#n1').val();  //string value
+			var n2 = $('#n2').val();  //string value
+			var int_n1 = parseInt(n1);		//converted typecast to int
+			var int_n2 = parseInt(n2);		//converted typecast to int
+			$('#sum').html(int_n1+int_n2);
+		});
+	</script>
+
+ -->
+</body>
+</html>

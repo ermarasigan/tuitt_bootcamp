@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>	Include Javascript</title>
+</head>
+<body>
+
+	<h1 id='heading'>This is a heading</h1>
+
+	<script type="text/javascript">
+		// alert(document.getElementById('heading').innerHTML);
+		// document.getElementById('heading').innerHTML="new value";
+		// document.getElementById('heading').style.color="pink";
+		document.getElementById('heading').style.display="none";
+		// document.getElementById('heading').style.display="none";
+	</script>
+
+	<button onclick="alert('This is inline')">
+		Inline
+	</button>
+
+	<button onclick="internal_function()">
+		Internal
+	</button>
+
+	<button onclick="external_function()">
+		External
+	</button>
+
+	<script type="text/javascript">
+		function internal_function(){
+			alert('This is internal');
+		}
+	</script>
+
+	<script type="text/javascript" src="external.js">
+	</script>
+
+</body>
+</html>

@@ -1,0 +1,37 @@
+(open "CSS properties directory" file to see examples of each property)
+
+COLOR
+-color
+
+TEXT
+-text-align
+-letter spacing
+-text-transform
+
+FONT
+-font-family
+-font-style
+-font-weight
+
+BACKGROUND
+-background-image
+-background-color
+
+BORDER
+-border-style
+-border-color
+-border-width
+-border-radius
+
+BASIC BOX
+-width
+-padding-left
+-padding-right
+-padding-top
+-padding-bottom
+-margin-left
+-margin-right
+-margin-top
+-margin-bottom
+-box-shadow
+-box-sizing

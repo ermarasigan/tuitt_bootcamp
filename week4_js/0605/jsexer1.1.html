@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>JS Exercise 1.1</title>
+
+	<!-- jQuery library -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</head>
+<body>
+
+	<p class='fade'>qwerty</p>
+	<p class='fade'>asdfg</p>
+	<p class='fade'>zxcvbn</p>
+
+	<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+	tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+	quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+	consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+	cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+	proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+
+	<button id="fadein">Fade In</button>
+
+	<script type="text/javascript">
+		$('#fadein').hide()
+		$('p.fade').click( function(){
+			$(this).fadeOut()
+			$('#fadein').show()
+		});
+		$('#fadein').click( function(){
+			$('#fadein').hide()
+			$('p.fade').fadeIn()
+		});
+	</script>
+
+
+	<hr>
+
+	<button id="slideup">Slide Up</button>
+	<button id="slidedown">Slide Down</button>
+
+	<figure>
+		<img id='image' src="images/pulag4.jpg" height="200px">
+	</figure>
+
+	<script type="text/javascript">
+		$('#slidedown').hide()
+		$('#slideup').click( function(){
+			$('#image').slideUp()
+			$('#slidedown').show()
+			$('#slideup').hide()
+		});
+		$('#slidedown').click( function(){
+			$('#image').slideDown()
+			$('#slidedown').hide()
+			$('#slideup').show()
+		});
+	</script>
+
+	<hr>
+
+	<button id="slide">Slide Up</button>
+
+	<figure>
+		<img id='image2' src="images/pulag3.jpg" height="200px">
+	</figure>
+
+	<script type="text/javascript">
+		$('#slide').click( function(){
+			$('#image2').slideToggle()
+			if($('#slide').html()=="Slide Up") {
+				$('#slide').html("Slide Down")
+			} else {
+				$('#slide').html("Slide Up")
+			}
+		});
+	</script>
+
+	<span id="display">0</span> <br>
+
+	<button id="button1">1</button>
+	<button id="button2">2</button>
+	<button id="button3">3</button> 
+	<br>
+	<button id="button4">4</button>
+	<button id="button5">5</button>
+	<button id="button6">6</button> 
+	<br>
+	<button id="button7">7</button>
+	<button id="button8">8</button>
+	<button id="button9">9</button>
+	<br>
+	<button id="buttonplus">+</button> 
+	<button id="buttonminus">-</button>
+	<button id="buttontimes">*</button>
+	<br>
+	<button id="buttondivide">/</button> 
+	<button id="buttonequals">=</button>
+	<button id="buttonclear">clear</button>
+
+	<script type="text/javascript">
+		var disp = parseInt($('#display').html());
+		$('#button1').click( function(){
+			$('#display').html(disp*10+1)
+			disp=disp*10+1
+		});
+		$('#button2').click( function(){
+			$('#display').html(disp*10+2)
+			disp=disp*10+2
+		});
+		$('#button3').click( function(){
+			$('#display').html(disp*10+3)
+			disp=disp*10+3
+		});
+		$('#button4').click( function(){
+			$('#display').html(disp*10+4)
+			disp=disp*10+4
+		});
+		$('#button5').click( function(){
+			$('#display').html(disp*10+5)
+			disp=disp*10+5
+		});
+		$('#button6').click( function(){
+			$('#display').html(disp*10+6)
+			disp=disp*10+6
+		});
+		$('#button7').click( function(){
+			$('#display').html(disp*10+7)
+			disp=disp*10+7
+		});
+		$('#button8').click( function(){
+			$('#display').html(disp*10+8)
+			disp=disp*10+8
+		});
+		$('#button9').click( function(){
+			$('#display').html(disp*10+9)
+			disp=disp*10+9
+		});
+		$('#buttonclear').click( function(){
+			disp=0
+			$('#display').html(disp)
+		});
+
+
+	</script>
+
+	<p>qwerty</p>
+	<script type="text/javascript">
+			$(document).ready( function(){
+				$('p').click( function(){
+					$(this).hide();
+				});
+			});
+	</script>
+
+</body>
+</html>

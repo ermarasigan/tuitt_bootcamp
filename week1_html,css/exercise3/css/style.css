@@ -1,0 +1,70 @@
+
+.bold {
+      font-weight: bold
+}
+
+.italic {
+      font-style: italic
+}
+
+.content {
+      color: white;
+      font-family: arial;
+}
+
+.label{
+      color: skyblue;
+      font-family: arial;
+}
+
+.name{
+      letter-spacing: 2px;
+      color: skyblue;
+      font-family: arial;
+}
+
+body {
+      background-image:  url("../images/pattern.png");
+      padding-left:25%;
+      padding-right:25%;
+}
+
+.blackbox {
+      /*background-color: #00895A; opacity:0.9;*/
+      background-color: rgba(0,0,0,0.7);
+      background-position: center;
+      border:1px solid gray;
+      padding-top: 50px;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-bottom: 50px;
+      float:center;
+      box-shadow: 0 0 50px black; 
+}
+
+div .profile{
+      text-align: center;
+      color: white;
+      font-family: arial;      width:300px;
+      border: 1px dashed white;
+      margin: 0 auto;
+}
+
+img {
+      border-radius: 5px;
+}
+
+.name:hover{
+      color:hsl(60,100%,50%);
+}
+
+#face {
+      height:200px;
+      width:200px;
+}
+
+#face:hover {
+      content:url("../images/bean2.jpg");
+      width: 200px;
+      height:200px;
+}
