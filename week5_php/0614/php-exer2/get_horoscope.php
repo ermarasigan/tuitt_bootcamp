@@ -37,45 +37,31 @@
 
 		echo "Zodiac is ";
 
-		if ($eval>=321 && $eval<=420) {
-			echo "Aries";
-		}
-		if ($eval>=421 && $eval<=520) {
-			echo "Taurus";
-		}
-		if ($eval>=521 && $eval<=621) {
-			echo "Gemini";
-		}
-		if ($eval>=622 && $eval<=722) {
-			echo "Cancer";
-		}
-		if ($eval>=723 && $eval<=823) {
-			echo "Leo";
-		}
-		if ($eval>=824 && $eval<=923) {
-			echo "Virgo";
-		}
-		if ($eval>=924 && $eval<=1023) {
-			echo "Libra";
-		}
-		if ($eval>=1024 && $eval<=1122) {
-			echo "Scorpio";
-		}
-		if ($eval>=1123 && $eval<=1221) {
-			echo "Sagitarrius";
-		}
-		if ($eval>=1222 || $eval<=120) {
-			echo "Capricorn";
-		}
-		if ($eval>=121 && $eval<=218) {
+			   if ($eval>=121 && $eval<=218) {
 			echo "Aquarius";
-		}
-		if ($eval>=219 && $eval<=320) {
+		} else if ($eval>=219 && $eval<=320) {
 			echo "Pisces";
-		}
-
-
-		
+		} else if ($eval>=321 && $eval<=420) {
+			echo "Aries";
+		} else if ($eval>=421 && $eval<=520) {
+			echo "Taurus";
+		} else if ($eval>=521 && $eval<=621) {
+			echo "Gemini";
+		} else if ($eval>=622 && $eval<=722) {
+			echo "Cancer";
+		} else if ($eval>=723 && $eval<=823) {
+			echo "Leo";
+		} else if ($eval>=824 && $eval<=923) {
+			echo "Virgo";
+		} else if ($eval>=924 && $eval<=1023) {
+			echo "Libra";
+		} else if ($eval>=1024 && $eval<=1122) {
+			echo "Scorpio";
+		} else if ($eval>=1123 && $eval<=1221) {
+			echo "Sagitarrius";
+		} else {
+			echo "Capricorn";
+		}		
 
 	}else{
 		echo 'false';
