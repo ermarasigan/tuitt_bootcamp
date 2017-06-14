@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title> Simple Layout </title>
+	<style type="text/css">
+
+      header, 
+      nav, 
+      main, 
+      footer {
+      	border: 1px solid black;
+      	box-sizing: border-box;
+      	/*text-align: center;*/
+      	/*display: table-cell;
+      	vertical-align: middle;*/
+      } 
+
+      header {
+      	height: 20vh;
+      	background:salmon;
+      }
+
+      nav {
+      	float:left;
+      	min-height: 60vh;
+      	width: 20%;
+      	background: yellow;
+      }
+
+      main {
+      	float:right;
+      	min-height: 60vh;
+      	width: 80%;
+      	background: honeydew;
+      }
+
+      footer {
+      	height: 20vh;
+      	background:pink;
+      }
+
+      /* body {
+      	margin:0;
+      }*/
+      .clear:after {
+      	content: "";
+      	display: block;
+      	clear: both;
+      }
+
+      img {
+      	width: 100%;
+      }
+
+      figure {
+      	border: 1px solid black;
+      	width: 20%;
+      	float: left;
+      	margin:0;
+      	box-sizing: border-box;
+      	padding: 20px;
+      }
+      header {
+      	font-size: 80px;
+        text-align: center;
+      }
+	</style>
+</head>
+<body>
+    <header>DOG MEAT FOR SALE</header>
+    <div class = "clear">
+	    <nav>nav</nav>
+	    <main>
+	      <figure>
+	    	<img src="exercise files/dog.jpg" alt="dog">
+	    	<figcaption>100pesos</figcaption>
+	      </figure>
+	      <figure>
+	    	<img src="exercise files/dog.jpg" alt="dog">
+	    	<figcaption>Caption 2</figcaption>
+	      </figure>
+	      <figure>
+	    	<img src="exercise files/dog.jpg" alt="dog">
+	    	<figcaption>Caption 3</figcaption>
+	      </figure>
+	      <figure>
+	    	<img src="exercise files/dog.jpg" alt="dog">
+	    	<figcaption>Caption 4</figcaption>
+	      </figure>
+	      <figure>
+	    	<img src="exercise files/dog.jpg" alt="dog">
+	    	<figcaption>Caption 5</figcaption>
+	      </figure>	    	
+	    </main>
+	</div>    
+    <!-- <div style="clear:both"> </div> -->
+    <footer>footer</footer>
+</body>
+</html>

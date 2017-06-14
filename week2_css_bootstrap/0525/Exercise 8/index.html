@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Exercise 8 Customized Bootstrap</title>
+
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Lobster" />
+    <!-- <link href="https://fonts.googleapis.com/css?family=Galada" rel="stylesheet"> -->
+    <link href="https://fonts.googleapis.com/css?family=Dr+Sugiyama|Galada" rel="stylesheet">
+    <style type="text/css">
+    	
+    	header {
+    		background-image: url("images/tpt-welcome-bg.jpg");
+    		background-repeat: no-repeat;
+    		background-size: cover;
+    	}
+
+		/*
+    	header > .container {
+    		min-height: 20vh;
+    	}*/
+
+    	header > .container > .banner-caption {
+    		/*font-family: Lobster, serif;*/
+    		font-family: 'Galada', cursive;
+    		/*font-family: 'Dr Sugiyama', cursive;*/
+    		/*color: red;*/
+    		text-align: center;
+    		/*text-fill-color: red;*/
+    	}
+
+    	#myNavbar,
+    	#myNavbar .dropdown-menu{
+    		text-align: right;
+    	}
+
+    	.strokeme{
+    		color: red;
+    		text-shadow:
+    		-1px -1px 0 #fff,
+    		1px -1px 0 #fff,
+    		-1px 1px 0 #fff,
+    		1px 1px 0 #fff;
+    	}
+
+    	header > .navbar {
+    		background-color: rgba(255,255,255,0.5);
+    	}
+
+    	header .navbar-brand {
+    		font-family: fantasy;
+    	}
+
+    	.bottom-header {
+    		text-align: center;
+    		margin-bottom: 0;
+    	}
+
+    	.bottom-header a {
+    		color: white;
+    		font-family: lobster;
+    		font-size: 1.5em;
+    	}
+
+    	header > nav > .container-fluid {
+    		padding: 10px 10px 0 10px;
+    	}
+
+    	@media screen and (min-width: 768px) {
+			ul li:hover ul {
+				display: block;
+			}
+		}
+
+		.affix {
+     		top: 0;
+     		left: 0;
+      		width: 100%;
+  		}
+
+		.content {
+		    color: white;
+		    font-family: serif;
+		}
+
+		body {
+      		position: relative; 
+  		}
+
+		#section1 {padding-top:50px;min-height:500px;color: #fff; background-color: #1E88E5;}
+  		#section2 {padding-top:50px;min-height:500px;color: #fff; background-color: #673ab7;}
+  		#section3 {padding-top:50px;min-height:500px;color: #fff; background-color: #ff9800;}
+
+  		.navbar-default .navbar-toggle .icon-bar {
+  			background-color: red;
+  		}
+
+  		.navbar-default .navbar-nav>li>a:hover {
+			background-color:pink
+  		}
+
+		/*.affix + .content {
+			padding-top: 70px;
+		}
+		*/
+
+    </style>
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body data-spy="scroll" data-target=".bottom-header" data-offset="50">
+  	<header class="container-fluid" style="padding:0">  
+  		<!-- TOP		 -->
+	    <nav class="navbar navbar-default">
+	      	<!-- <div class="container"> -->
+	        <div class="navbar-header">
+	          	<button type="button" 
+	                  	class="navbar-toggle" 
+	                  	data-toggle="collapse" 
+	                  	data-target="#myNavbar">
+	           		<span class="icon-bar"></span>
+	            	<span class="icon-bar"></span>
+	            	<span class="icon-bar"></span>
+	          	</button>
+	          	<a style="color:black;" class="navbar-brand" href="#">
+	            Dessert Buddies
+	          	</a>
+	        </div>
+	        <div class="collapse navbar-collapse" id="myNavbar">
+	        	<ul class="nav navbar-nav navbar-right">
+	            	<!-- <li class="active"> -->
+	            	<li>
+	            		<a href="#">Home</a>
+	            	</li>
+	            	<li class="dropdown">
+	              		<a class="dropdown-toggle" data-toggle="dropdown" href="#"> 
+	                		Work
+	                		<span class="caret"></span>
+	              		</a>
+			            <ul class="dropdown-menu">
+			               	<li><a href="#">Work 1</a></li>
+			               	<li><a href="#">Work 2</a></li>
+			               	<li><a href="#">Work 3</a></li>
+			            </ul>
+	            	</li>
+	            	<li>
+	              		<a href="#">About</a>
+	            	</li>
+	            	<li>
+	              		<a href="#">Contact</a
+	            	</li>
+	          	</ul>
+	        <!-- </div>      -->
+	      	</div>
+	    </nav>
+
+      	<!-- MIDDLE -->
+      	<div class="container">
+      		<div class="banner-caption strokeme">
+      			<!-- <h1>Lorem Ipsum Dolor Sit Amet</h1>
+      			<h2>cliquam tincidunt mauris</h2> -->
+      			<h1>Shet sobrang init</h1>
+      			<h2>abot singit</h2>
+      			<!-- <h5>emmanlalakbay</h5> -->
+      		</div>
+      	<!-- BOTTOM -->
+		    <nav class="navbar navbar-default bottom-header"
+		    	data-spy="affix" data-offset-top="197"
+		    	style="background-color:orange;">
+		    	<!-- <div class="container-fluid"> -->
+		    	<ul class="nav navbar-nav">
+		    		<li>
+		              	<a href="#section1">
+		              	Very Very Hot</a>
+		            </li>
+		            <li>
+		              	<a href="#section2">Very Hot</a>
+		            </li>
+		            <li>
+		              	<a href="#section3">Hot</a>
+		            </li>
+		        </ul>
+			    <!-- </div> -->
+			</nav>		        
+      	</div>
+	</header>
+	<div class="container-fluid content" style="margin:0; padding: 0">
+    	<div id="section1" class="container-fluid">
+    		<h1 style="margin:0;padding:0;">Metro Manila</h1>
+			<p>	融なざお参問ヒヘヌ夏文年ナユ陣橋ぎもにへ閣街ネモク調2一リムヤタ経情リどで稿黒っまぴレ偵店う覚分トメ聞帰イホ勝今ホヱ事偽刀穂しのン。闘ユソキ過代要みぽ似也ハムクカ兵2更づう同旅ネユハヌ死操げよに売流たスす高89一宙開神コニ米掲ぴよす年刊ニス期距べスん点退輸需由すむるぼ。備て入札っくよ界津つにぱぜ国根造2連ム天理特条のラどい況況は芸位ねたげだ護本イトヱウ経子みぜ繁吹オネナメ役盤位微ル。</p>
+			<p>	融なざお参問ヒヘヌ夏文年ナユ陣橋ぎもにへ閣街ネモク調2一リムヤタ経情リどで稿黒っまぴレ偵店う覚分トメ聞帰イホ勝今ホヱ事偽刀穂しのン。闘ユソキ過代要みぽ似也ハムクカ兵2更づう同旅ネユハヌ死操げよに売流たスす高89一宙開神コニ米掲ぴよす年刊ニス期距べスん点退輸需由すむるぼ。備て入札っくよ界津つにぱぜ国根造2連ム天理特条のラどい況況は芸位ねたげだ護本イトヱウ経子みぜ繁吹オネナメ役盤位微ル。</p>
+			<p>	融なざお参問ヒヘヌ夏文年ナユ陣橋ぎもにへ閣街ネモク調2一リムヤタ経情リどで稿黒っまぴレ偵店う覚分トメ聞帰イホ勝今ホヱ事偽刀穂しのン。闘ユソキ過代要みぽ似也ハムクカ兵2更づう同旅ネユハヌ死操げよに売流たスす高89一宙開神コニ米掲ぴよす年刊ニス期距べスん点退輸需由すむるぼ。備て入札っくよ界津つにぱぜ国根造2連ム天理特条のラどい況況は芸位ねたげだ護本イトヱウ経子みぜ繁吹オネナメ役盤位微ル。</p>
+		</div>
+		<div id="section2" class="container-fluid">
+    		<h1 style="margin:0;padding:0;">Sahara Desert</h1>
+			<p>	融なざお参問ヒヘヌ夏文年ナユ陣橋ぎもにへ閣街ネモク調2一リムヤタ経情リどで稿黒っまぴレ偵店う覚分トメ聞帰イホ勝今ホヱ事偽刀穂しのン。闘ユソキ過代要みぽ似也ハムクカ兵2更づう同旅ネユハヌ死操げよに売流たスす高89一宙開神コニ米掲ぴよす年刊ニス期距べスん点退輸需由すむるぼ。備て入札っくよ界津つにぱぜ国根造2連ム天理特条のラどい況況は芸位ねたげだ護本イトヱウ経子みぜ繁吹オネナメ役盤位微ル。</p>
+			<p>	融なざお参問ヒヘヌ夏文年ナユ陣橋ぎもにへ閣街ネモク調2一リムヤタ経情リどで稿黒っまぴレ偵店う覚分トメ聞帰イホ勝今ホヱ事偽刀穂しのン。闘ユソキ過代要みぽ似也ハムクカ兵2更づう同旅ネユハヌ死操げよに売流たスす高89一宙開神コニ米掲ぴよす年刊ニス期距べスん点退輸需由すむるぼ。備て入札っくよ界津つにぱぜ国根造2連ム天理特条のラどい況況は芸位ねたげだ護本イトヱウ経子みぜ繁吹オネナメ役盤位微ル。</p>
+			<p>	融なざお参問ヒヘヌ夏文年ナユ陣橋ぎもにへ閣街ネモク調2一リムヤタ経情リどで稿黒っまぴレ偵店う覚分トメ聞帰イホ勝今ホヱ事偽刀穂しのン。闘ユソキ過代要みぽ似也ハムクカ兵2更づう同旅ネユハヌ死操げよに売流たスす高89一宙開神コニ米掲ぴよす年刊ニス期距べスん点退輸需由すむるぼ。備て入札っくよ界津つにぱぜ国根造2連ム天理特条のラどい況況は芸位ねたげだ護本イトヱウ経子みぜ繁吹オネナメ役盤位微ル。</p>
+		</div>
+		<div id="section3" class="container-fluid">
+    		<h1 style="margin:0;padding:0;">Ulo ni Duterte</h1>
+			<p>	融なざお参問ヒヘヌ夏文年ナユ陣橋ぎもにへ閣街ネモク調2一リムヤタ経情リどで稿黒っまぴレ偵店う覚分トメ聞帰イホ勝今ホヱ事偽刀穂しのン。闘ユソキ過代要みぽ似也ハムクカ兵2更づう同旅ネユハヌ死操げよに売流たスす高89一宙開神コニ米掲ぴよす年刊ニス期距べスん点退輸需由すむるぼ。備て入札っくよ界津つにぱぜ国根造2連ム天理特条のラどい況況は芸位ねたげだ護本イトヱウ経子みぜ繁吹オネナメ役盤位微ル。</p>
+			<p>	融なざお参問ヒヘヌ夏文年ナユ陣橋ぎもにへ閣街ネモク調2一リムヤタ経情リどで稿黒っまぴレ偵店う覚分トメ聞帰イホ勝今ホヱ事偽刀穂しのン。闘ユソキ過代要みぽ似也ハムクカ兵2更づう同旅ネユハヌ死操げよに売流たスす高89一宙開神コニ米掲ぴよす年刊ニス期距べスん点退輸需由すむるぼ。備て入札っくよ界津つにぱぜ国根造2連ム天理特条のラどい況況は芸位ねたげだ護本イトヱウ経子みぜ繁吹オネナメ役盤位微ル。</p>
+			<p>	融なざお参問ヒヘヌ夏文年ナユ陣橋ぎもにへ閣街ネモク調2一リムヤタ経情リどで稿黒っまぴレ偵店う覚分トメ聞帰イホ勝今ホヱ事偽刀穂しのン。闘ユソキ過代要みぽ似也ハムクカ兵2更づう同旅ネユハヌ死操げよに売流たスす高89一宙開神コニ米掲ぴよす年刊ニス期距べスん点退輸需由すむるぼ。備て入札っくよ界津つにぱぜ国根造2連ム天理特条のラどい況況は芸位ねたげだ護本イトヱウ経子みぜ繁吹オネナメ役盤位微ル。</p>
+		</div>
+	</div>
+	
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/bootstrap.min.js"></script>
+  </body>
+</html>
