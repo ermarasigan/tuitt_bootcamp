@@ -15,6 +15,10 @@
 			<input type="submit" name="submit" value="Solve for Area">
 	</form>
 
+	<?php
+		echo phpinfo();
+	?>
+
 
 </body>
 </html>
