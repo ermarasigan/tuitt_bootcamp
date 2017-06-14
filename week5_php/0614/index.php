@@ -1,41 +1,18 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Getpost Sample</title>
+	<title>PHP Exercise</title>
 </head>
 <body>
 	
-	<!-- add ?input1=hello in address bar -->
-	<?php
-		// echo "Input: ";
-		// echo $_GET['input1'];
-		// echo "<hr>";
-		// echo "Hello " . $_GET['name'];
-	?>
 
-	<!-- <form action="get_example.php" method="GET">
-		Input1:<br>
-			<input type="text" name="input1"> <br>
-		Name:<br>
-			<input type="text" name="name"> <br> <br>
-			<input type="submit" value="Submit">
-	</form> -->
-
-<!-- 	<form action="post_example.php" method="POST">
-		Input1:<br>
-			<input type="text" name="input1"> <br>
-		Name:<br>
-			<input type="text" name="name"> <br> <br>
-			<input type="submit" value="Submit">
-	</form> -->
-
-	<form action="session_home.php" method="POST">
-		Username:<br>
+	<form action="get_area.php" method="POST">
+		Length:<br>
 			<!-- index comes from name -->
-			<input type="text" name="username"> <br>
-		Password:<br>
-			<input type="password" name="password"> <br> <br>
-			<input type="submit" value="Submit">
+			<input type="number" name="length" value=0> <br>
+		Width:<br>
+			<input type="number" name="width"  value=0> <br> <br>
+			<input type="submit" name="submit" value="Solve for Area">
 	</form>
 
 
