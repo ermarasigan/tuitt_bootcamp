@@ -1,0 +1,169 @@
+/*formatting for About page*/
+
+/*this is a fix for white space in right side*/
+html, body {
+  overflow-x: hidden;
+}
+
+/*light sand background*/
+div[class="row"] {
+  background: rgba(253,242,217,0.7)
+}
+
+/*about text formatting*/
+h1, p {
+  color: white;
+  margin: 0;
+}
+h1 {
+  font-family: "bebasbold";
+  font-size: 3em;
+  text-align: center;
+}
+p {
+  font-family: "homemadeapple";
+  font-size: 1em;
+  padding: 10px 0;
+}
+
+/*bigger fonts for bigger screen*/
+@media screen and (min-width: 768px) {
+  h1 {
+    padding: 30px 0 0;
+    font-size: 4em;
+  }
+  p {
+    font-size:1.2em;
+  }
+}
+
+/*formatting for profile pic*/
+div a figure {
+  padding: 30px;
+}
+#profilepic {
+  width: 60%;
+  height: 60%; 
+  border-radius: 50%;
+}
+
+/*bigger pic for bigger screens*/
+@media screen and (min-width: 992px) {
+  #profilepic {
+    width: 100%;
+    height: 100%;
+  } 
+}
+
+/*about box padding*/
+#aboutbox {
+  padding: 20px;
+}
+
+/*About box background*/
+#aboutbox,
+#aboutbox div .row {
+  background-color: #777;
+}
+
+/*specify aspect ratio h/w*/
+#aboutbox:before {
+    content: "";
+    float: left;
+    padding-bottom: 75%;
+}
+/*this is a clearfix. */
+#aboutbox:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+/*solution from stackoverflow.com/questions/12121090 */
+
+
+/*formatting for map in Home page*/
+
+/*gray*/
+.land { 
+  fill: #CCCCCC;
+  fill-opacity: 1;  
+  stroke: #313130;
+  stroke-opacity: 1;
+  stroke-width:0.5;
+}
+
+/*orange*/
+.land:hover {
+  fill: #f3901b;
+  fill-opacity: 1;
+}
+
+/*yellow*/
+path[title="Batangas"],
+path[title="Cebu"],
+path[title="Leyte"],
+path[title="Benguet"],
+path[title="Cagayan"],
+path[title="Albay"]  
+{
+  fill: #fae014;
+}
+
+/*red*/
+path[title="Laguna"],
+path[title="Masbate"],
+path[title="Bataan"],
+path[title="Ilocos Sur"],
+path[title="Antique"]
+{
+  fill: #dc453a;
+}
+
+/*darkred*/
+path[title="Bulacan"],
+path[title="Bohol"],
+path[title="Tarlac"],
+path[title="Camarines Sur"] 
+{
+  fill: #b43a2a;
+}
+
+/*blue*/
+path[title="Metropolitan Manila"],
+path[title="Samar"],
+path[title="Pangasinan"],
+path[title="Mountain Province"],
+path[title="Aklan"]
+{
+  fill: #4791b6;
+}
+
+/*darkblue*/
+path[title="Quezon"],
+path[title="Pampanga"],
+path[title="Ilocos Norte"],
+path[title="Sorsogon"],
+path[title="Iloilo"]
+{
+  fill: #346faa;
+}
+
+/*purple*/
+path[title="Cavite"],
+path[title="Biliran"],
+path[title="Zambales"],
+path[title="Nueva Ecija"],
+path[title="Capiz"]
+
+{
+  fill: #323781;
+}
+
+/*dark purple*/
+path[title="Rizal"],
+path[title="Palawan"],
+path[title="La Union"],
+path[title="Camarines Norte"] 
+{
+  fill: #2e2b5e;
+}

@@ -1,0 +1,199 @@
+/*formatting for Province subpages*/
+
+/*this is a fix for white space in right side*/
+html, body {
+  overflow-x: hidden;
+}
+
+/*light sand background*/
+div[class="row"] {
+  background: rgba(253,242,217,0.7)
+}
+
+/*text description formatting*/
+h1, h3, p {
+  color: #777;
+  margin: 0;
+}
+h1 {
+  padding: 30px 0 0;
+  font-family: "bebasbold";
+  font-size: 3em;
+}
+h3 {
+  font-family: "bebasbook";
+  font-size: 1.5em;
+}
+p {
+  font-family: "bebaslight";
+  font-size: 1em;
+  padding: 20px 0;
+}
+
+/*bigger fonts for bigger screen*/
+@media screen and (min-width: 768px) {
+  h1 {
+    font-size: 6em;
+  }
+  h3 {
+    font-size: 3em;
+  }
+  p {
+    font-size: 2em;
+  }
+}
+
+/*box background for visited provinces*/
+#visitedbox {
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
+/*specify aspect ratio h/w*/
+#visitedbox:before {
+    content: "";
+    float: left;
+    padding-bottom: 75%;
+}
+/*this is a clearfix. */
+#visitedbox:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+/*change text formatting when visited province*/
+#visitedbox h1, 
+#visitedbox h3, 
+#visitedbox p {
+  color: white;
+}
+#visitedbox p {
+  font-family: "bebasregular";
+}
+.strokeme{
+  color: #777;
+  text-shadow:
+  -1px -1px 0 #777,
+  1px -1px 0 #777,
+  -1px 1px 0 #777,
+  1px 1px 0 #777;
+}
+
+/*formatting for links to gallery, itin, journal*/
+#province-links {
+  background: none;
+}
+#province-links > a:visited, 
+#province-links > a:link,
+#province-links > a:active {
+  text-decoration: none;
+}
+#province-links > a:hover {
+  opacity:0.7;
+}
+#province-links a .text-center {
+  color: white;
+  padding: 0 10px 20px;
+  font-size: 1.2em;
+  font-family: "lobster";
+}
+@media screen and (min-width: 768px) {
+  #province-links a .text-center {
+    font-size: 3em;
+  }
+}
+
+/*formatting for map in Province subpages*/
+/*gray*/
+.land { 
+  fill: #CCCCCC;
+  fill-opacity: 1;  
+  stroke: #313130;
+  stroke-opacity: 1;
+  stroke-width:0.5;
+  fill-opacity: 0.5;
+}
+
+/*orange*/
+.land:hover {
+  fill: #f3901b;
+  fill-opacity: 1;
+}
+
+/*yellow*/
+path[title="Batangas"],
+path[title="Cebu"],
+path[title="Leyte"],
+path[title="Benguet"],
+path[title="Cagayan"],
+path[title="Albay"]  
+{
+  fill: #fae014;
+  fill-opacity: 0.3;
+}
+
+/*red*/
+path[title="Laguna"],
+path[title="Masbate"],
+path[title="Bataan"],
+path[title="Ilocos Sur"],
+path[title="Antique"]
+{
+  fill: #dc453a;
+  fill-opacity: 0.3;
+}
+
+/*darkred*/
+path[title="Bulacan"],
+path[title="Bohol"],
+path[title="Tarlac"],
+path[title="Camarines Sur"] 
+{
+  fill: #b43a2a;
+  fill-opacity: 0.3;
+}
+
+/*blue*/
+path[title="Metropolitan Manila"],
+path[title="Samar"],
+path[title="Pangasinan"],
+path[title="Mountain Province"],
+path[title="Aklan"]
+{
+  fill: #4791b6;
+  fill-opacity: 0.3;
+}
+
+/*darkblue*/
+path[title="Quezon"],
+path[title="Pampanga"],
+path[title="Ilocos Norte"],
+path[title="Sorsogon"],
+path[title="Iloilo"]
+{
+  fill: #346faa;
+  fill-opacity: 0.3;
+}
+
+/*purple*/
+path[title="Cavite"],
+path[title="Biliran"],
+path[title="Zambales"],
+path[title="Nueva Ecija"],
+path[title="Capiz"]
+{
+  fill: #323781;
+  fill-opacity: 0.3;
+}
+
+/*dark purple*/
+path[title="Rizal"],
+path[title="Palawan"],
+path[title="La Union"],
+path[title="Camarines Norte"] 
+{
+  fill: #2e2b5e;
+  fill-opacity: 0.3;
+}

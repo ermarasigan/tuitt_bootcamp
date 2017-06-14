@@ -1,0 +1,85 @@
+/*formatting for header partial*/
+
+/*full width header*/
+header[class="container-fluid"] {
+  padding: 0;
+  width: 100%;
+}
+
+/*light sand background*/
+.nav .dropdown .dropdown-menu {
+  background: rgba(253,242,217,0.7)
+} 
+
+/*sand colored background*/
+.navbar-default > div[class="container"] {
+  padding: 10px 0;
+  background-color: rgb(253,242,217);
+  width: 100%;
+}
+.nav .dropdown .dropdown-menu .dropdown-submenu .dropdown-menu{
+  background: rgba(253,242,217,1)
+} 
+
+.navbar>.container .navbar-brand, 
+.navbar>.container-fluid .navbar-brand {
+  margin: 0;
+}
+
+.navbar-default {
+  font-family: bebasbook;
+  font-size: 1.5em;
+}
+
+.navbar-default .navbar-brand {
+  font-family: lobster, serif;
+  font-size:1.5em;
+  font-weight: bolder;
+}
+
+nav > .navbar-default {
+  height: 200px;
+}
+      
+.container-fluid > .navbar-collapse,
+.container-fluid > .navbar-header,
+.container > .navbar-collapse, 
+.container > .navbar-header, 
+header > .navbar {
+  background-color: rgb(253,242,217);
+  margin: 0;
+}
+
+.navbar .container,
+.container-fluid,
+header > nav > .container {
+  margin: 0;
+}
+
+@media screen and (min-width: 768px) {
+  header {
+    background-position: center;
+  }
+}
+
+#myNavbar,
+#myNavbar .dropdown-menu{
+  text-align: right;
+}
+
+header > .navbar {
+  background-color: rgba(255,255,255,1);
+}
+
+header > nav > .container-fluid {
+  padding: 10px 10px 0 10px;
+}
+
+.dropdown-submenu {
+    position: relative;
+}
+
+/*formatting for burger icon*/
+.navbar-default .navbar-toggle .icon-bar {
+  background-color: #777;
+}
