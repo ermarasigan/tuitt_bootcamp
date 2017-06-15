@@ -4,7 +4,7 @@
 	if (isset($_POST['submit'])){ 
 
 		$birthdate = $_POST['birthdate'];
-
+	
 		$int_year = intval(substr($birthdate,0,4)); 
 		$int_day = intval(substr($birthdate,8,2));
 		$int_month = intval(substr($birthdate,5,2));

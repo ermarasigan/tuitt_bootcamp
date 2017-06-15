@@ -36,8 +36,6 @@
 	</form>
 
 
-
-
 	<?php 
 		// require_once "get_fate.php";
 	?>
