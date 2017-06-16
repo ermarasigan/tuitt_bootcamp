@@ -1,0 +1,70 @@
+/*Stylesheet for menu items*/
+body {
+	background-color: lightyellow;
+}
+
+.itembox{
+	background:orange;
+	width: 300px;
+	text-align: center;
+	color: white;
+	padding: 10px;
+	margin: 10px;
+	box-sizing: content-box;
+	font-family: cursive;
+	float: left;
+	border-radius: 10px;
+	display: inline-block;
+	height: 330px;
+}
+
+main {
+	position: relative;
+}
+
+#menu {
+	position: absolute;
+	left: 50%;
+	transform: translateX(-50%);
+	text-align: center;
+	width: 680px;
+}
+
+form
+,main h1 {
+	text-align: center;
+}
+
+main h1 {
+	color: red;
+	font-family: sans-serif;
+	margin: 0;
+	padding: 0;
+}
+
+.clear:after {
+  	content: "";
+  	display: block;
+  	clear: both;
+}
+
+form input 
+,form select{
+	height: 35px;
+	border-radius: 5px;
+	font-size: 20px;
+	padding: 5px;
+	margin: 5px;
+}
+
+form span {
+	font-size: 40px;
+	font-family: fantasy;
+	color: orange;
+}
+
+#logout{
+	position: fixed;
+	top: 10%;
+	right: 10%;
+}

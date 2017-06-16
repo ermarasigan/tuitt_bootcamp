@@ -1,0 +1,40 @@
+/*Stylesheet for landing page*/
+body {
+	background-color: lightyellow;
+}
+
+#welcome {
+	position: relative;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%,-50%);
+	text-align: center;
+	color: orange;
+	font-family: cursive;
+	font-weight: bolder;
+	text-shadow: 1px 1px 1px grey;
+	font-size: 30px;
+}
+body {
+	position: absolute;
+	height: 100vh;
+	width: 100%;
+}
+
+form input 
+,form select{
+	height: 25px;
+	border-radius: 5px;
+}
+
+header {
+	background: red;
+	color: white;
+	padding: 5px;
+	margin: 0;
+	/*font-family: cursive;*/
+}
+body {
+	padding: 0;
+	margin: 0;
+}
