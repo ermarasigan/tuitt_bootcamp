@@ -1,0 +1,138 @@
+create table customers (
+    id int not null auto_increment,
+    cust_name varchar(255) not null,
+    cust_addr varchar(255) not null,
+    username varchar(255) not null,
+    primary key(id),
+    foreign key(username) references accounts(username)
+);
+
+
+create database musicstore;
+use musicstore;
+create table users (
+    id int auto_increment not null,
+    username varchar(255) not null,
+    password varchar(255) not null,
+    primary key(id) );
+
+create table artists (
+    id int auto_increment not null,
+    name varchar(255) not null unique,
+    primary key(id) );
+
+create table albums (
+    id int auto_increment not null,
+    name varchar(255) not null,
+    year year(4),
+    artist_id int,
+    primary key(id),
+    foreign key(artist_id) references artists(id) 
+);
+
+create table playlists (
+    id int auto_increment not null,
+    date_created timestamp default current_timestamp,
+    user_id int,
+    primary key(id),
+    foreign key(user_id) references users(id)
+       on update cascade
+       on delete set null 
+);
+
+create table songs (
+    id int auto_increment not null,
+    title varchar(255) not null,
+    length int,
+    genre varchar(255),
+    album_id int,
+    primary key(id),
+    foreign key(album_id) references albums(id)
+       on update cascade
+       on delete set null 
+);
+
+alter table songs change pamagat title varchar(255);
+
+create table songs_playlists (
+    id int auto_increment not null,
+    song_id int,
+    playlist_id int,
+    primary key(id),
+    foreign key(song_id) references songs(id)
+       on update cascade
+       on delete set null,
+    foreign key(playlist_id) references playlists(id)
+       on update cascade
+       on delete set null
+);
+
+
+alter table artistas rename to artists;
+drop table <tablename>;
+
+insert into artists(name) values ('Rivermaya'),('Psy');
+
+insert into albums(name,year,artist_id) 
+values ('Trip',1996,5),('Psy 6',2012,6);
+
+insert into songs(title,length,genre,album_id)
+values ('Gangnam Style',253,'k-pop',4),
+       ('Kundiman',234,'OPM',3),
+       ('Kisapmata',279,'OPM',3);
+
+Select title,length from songs where genre="OPM" and length > 240;
+
+select * from albums join songs on album_id=albums.id;
+Update songs set length=240 where title='Kundiman';
+
+select * from albums join songs  on songs.album_id=albums.id;
+select * from albums a join songs b  on b.album_id=a.id;
+
+select albums.name as album_name,
+       albums.year as album_year,
+       songs.title as song_title,
+       songs.length as song_length,
+       songs.genre as song_genre
+       from songs join albums on songs.album_id = albums.id;
+
+
+select a.name as Album_Name,
+       a.year as Album_Year,
+       s.title as Song_Title,
+       s.length as Song_Length,
+       s.genre as Song_Genre
+       from albums a LEFT join songs s 
+      on s.album_id = a.id
+;
+
+select a.name as Album_Name,
+       a.year as Album_Year,
+       s.title as Song_Title,
+       s.length as Song_Length,
+       s.genre as Song_Genre
+       from albums a LEFT join songs s 
+      on s.album_id = a.id
+	where s.title like '%i%a%'
+;
+
+select a.name as Album_Name,
+       a.year as Album_Year,
+       s.title as Song_Title,
+       s.length as Song_Length,
+       s.genre as Song_Genre
+       from albums a LEFT join songs s 
+      on s.album_id = a.id
+	where s.genre in ('opm','k-pop')
+;
+
+
+    
+
+
+create table  (
+    id int not null auto_increment,
+     varchar(255) not null,
+    primary key(id),
+    foreign key() references ()
+);
