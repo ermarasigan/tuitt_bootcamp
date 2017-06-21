@@ -138,3 +138,213 @@ order by p.`productName`
 15) List of employees who are 
 in the same country as the customers they serve
 
+SELECT distinct CONCAT(e.`firstName`,' ',e.`lastName`) as Employee_Name,
+o.`Country` as Employee_Country
+FROM `customers` as c
+,`employees` as e
+,`offices` as o
+WHERE c.`salesRepEmployeeNumber` = e.`employeeNumber`
+and e.`officeCode` = o.`officeCode`
+and c.`country` = o.`country`
+
+SELECT distinct CONCAT(e.`firstName`,' ',e.`lastName`) as Employee_Name,
+o.`Country` as Employee_Country,
+c.`customerName` as Customer_Name,
+c.`country` as Customer_Country
+FROM (`employees` as e join `offices` as o
+on e.`officeCode` = o.`officeCode`)
+left join `customers` as c
+on c.`salesRepEmployeeNumber` = e.`employeeNumber`
+and c.`country` = o.`country`
+
+
+16) Who are the employees who report to Anthony Bow
+
+SELECT 
+CONCAT(a.`firstName`,' ',a.`lastName`) as Employee_Name,
+a.jobTitle as Employee_Title,
+CONCAT(b.`firstName`,' ',b.`lastName`) as Manager_Name,
+b.jobTitle as Manager_Title
+FROM `employees` as a
+join `employees` as b
+on a.reportsTo = b.employeeNumber
+where (b.firstName = 'Anthony'
+ and b.lastName = 'Bow')
+
+
+
+17) Who is the supervisor of Anthony Bow
+
+SELECT 
+CONCAT(emp.`firstName`,' ',emp.`lastName`) as Employee_Name,
+emp.jobTitle as Employee_Title,
+CONCAT(mgr.`firstName`,' ',mgr.`lastName`) as Manager_Name,
+mgr.jobTitle as Manager_Title
+FROM `employees` as emp
+join `employees` as mgr
+on emp.reportsTo = mgr.employeeNumber
+where (emp.firstName = 'Anthony'
+ and emp.lastName = 'Bow')
+
+
+18) Customer names without the letter A
+SELECT `customerName` 
+FROM `customers` 
+WHERE `customerName` not like '%a%'
+
+
+19) Which product line contains the 
+"state of the art" description
+
+SELECT `productLine` as Product_line,
+`textDescription` as Description
+FROM `productlines`  
+WHERE `textDescription` like '%state of the art%'
+
+
+20) List all the countries of the customers
+
+SELECT distinct `country` FROM `customers`
+order by `country`
+
+
+21) List all of the order status
+
+SELECT distinct status FROM `orders`
+
+
+IN/ANY/ALL
+22) List all customers who are in
+USA, France, Canada, UK, Italy
+
+SELECT `customerName`,
+`country` 
+FROM `customers` 
+WHERE `country` 
+IN ('USA','France','UK','Canada','Italy')
+order by `country` 
+
+
+23) What is the most expensive product?
+
+SELECT `productName`
+,`MSRP`
+FROM `products` 
+WHERE `MSRP` =
+(select max(`MSRP`)
+ from `products`)
+
+ SELECT `productName`
+,`MSRP`
+FROM `products` 
+order by `MSRP` DESC
+LIMIT 1
+
+
+24) Number of customers who are in UK
+
+SELECT count(*) FROM `customers` 
+WHERE `country` = 'UK'
+
+
+25) Who is the customer
+who made the most orders
+#(who ordered the most times)
+
+SELECT c.customerName
+from customers c
+where c.customerNumber =
+(SELECT o.customerNumber
+FROM `orders` as o 
+GROUP BY o.customerNumber
+ORDER BY (COUNT(o.customerNumber)) DESC LIMIT 1)
+
+SELECT c.customerName
+ ,COUNT(o.customerNumber) count_order
+FROM `orders` as o
+join `customers` as c
+on o.customerNumber = c.customerNumber
+GROUP BY o.customerNumber
+order by count_order desc
+LIMIT 1
+
+#HAVING c.customerName like '%euro%'
+
+SELECT c.customerName
+ ,count(o.customerNumber) count
+FROM `orders` as o
+join `customers` as c
+on o.customerNumber = c.customerNumber
+GROUP BY o.customerNumber
+having count = 
+	(SELECT max(order_count)
+       FROM (SELECT o1.customerNumber
+            ,count(*) as order_count
+             FROM `orders` as o1
+             GROUP BY o1.customerNumber) as o2)
+
+
+26) Who is the customer
+who ordered the most items
+
+select c.`customerName` as Customer_Name
+,sum(od.`quantityOrdered`) as Total_Qty_Ordered
+from `orderdetails` od
+join `orders` o
+join `customers` c
+on od.`orderNumber` = o.`orderNumber`
+and o.`customerNumber` = c.`customerNumber`
+group by c.`customerName`
+#order by Total_Qty_Ordered desc limit 1
+having Total_Qty_Ordered = 
+	(SELECT max(o2.Qty_Ordered)
+       FROM (SELECT sum(od.`quantityOrdered`) as Qty_Ordered
+               from `orderdetails` od
+               join `orders` o
+               join `customers` c
+               on od.`orderNumber` = o.`orderNumber`
+               and o.`customerNumber` = c.`customerNumber`
+               group by c.`customerName`) as o2)
+
+
+27) Who is the customer who paid the most
+(total payments)?
+
+select c.`customerName` as Customer_Name
+,format(sum(od.`quantityOrdered` * od.`priceEach`),2) as Total_Amt_Paid
+from `orderdetails` od
+join `orders` o
+join `customers` c
+on od.`orderNumber` = o.`orderNumber`
+and o.`customerNumber` = c.`customerNumber`
+group by c.`customerName`
+having sum(od.`quantityOrdered` * od.`priceEach`) = 
+	(SELECT max(o2.Amt_Paid)
+       FROM (SELECT sum(od.`quantityOrdered` * od.`priceEach`) as Amt_Paid
+               from `orderdetails` od
+               join `orders` o
+               join `customers` c
+               on od.`orderNumber` = o.`orderNumber`
+               and o.`customerNumber` = c.`customerNumber`
+               group by c.`customerName`) as o2)
+
+SELECT c.`customerName` as Customer_Name,
+format(sum(p.`amount`),2) as Total_Payments
+FROM `payments` p
+join `customers` c
+on p.`customerNumber` = c.`customerNumber`  
+group by p.`customerNumber`
+order by sum(p.`amount`) desc
+limit 1
+
+
+28) Who are the employees who 
+do not serve any customer?
+
+SELECT distinct concat(e.`firstName`,' ',e.`lastName`) as Employee_Name
+,c.`salesRepEmployeeNumber`
+FROM `employees` as e 
+left join `customers` as c
+on c.`salesRepEmployeeNumber` = e.`employeeNumber`
+where c.`salesRepEmployeeNumber` is null
+
