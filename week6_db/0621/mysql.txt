@@ -1,0 +1,29 @@
+CMD
+  cd users\day4\desktop\xampp\mysql\bin\
+  mysql -u root
+
+  show databases;
+  use <database>;
+  show tables;
+  describe <table>;
+  select * from <table>;
+
+localhost\phpmyadmin
+
+
+AGGREGATION OPERATORS
+
+> COUNT, SUM, MIN, MAX, AVG
+select count(*) from movie_casts
+where title = 'Star Wars' and year = 2015;
+
+
+GROUPING RESULTS
+
+> GROUP BY
+select avg(length), genre from songs
+group by genre;
+
+> HAVING 
+select avg(length), genre from songs
+group by genre having avg(length) > 254;

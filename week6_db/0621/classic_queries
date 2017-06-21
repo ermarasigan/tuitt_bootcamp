@@ -1,0 +1,140 @@
+1) Who are the customers from the Philippines
+
+SELECT * FROM `customers` 
+WHERE `country` = 'philippines'
+
+
+2) Who is the contact person of La Rochelle Gifts customer
+
+SELECT CONCAT(`contactFirstName`,' ',`contactLastName`) 
+FROM `customers` 
+WHERE `customerName` = 'La Rochelle Gifts'
+
+
+3) How much is the MSRP of the Titanic product
+
+SELECT `productName` ,`MSRP` 
+FROM `products` 
+WHERE `productName` like '%Titanic%'
+
+
+4) Which employee uses the 'jfirrelli@classicmodelcars.com' email?
+
+SELECT * 
+FROM `employees` 
+WHERE `email` = 'jfirrelli@classicmodelcars.com'
+
+
+5) Who are the customers who dont have a state
+
+SELECT `customerName`
+FROM `customers` WHERE `state` is null
+
+
+6) What is the email of the employee Steve Pattersoni?
+
+SELECT CONCAT(`firstName`,' ',`lastName`) as Employee_Name,
+`email` as Employee_Email 
+FROM `employees` 
+WHERE `lastName` like 'Patterson%' 
+and `firstName` = 'Steve'
+
+
+7) List customers who are NOT in US 
+and have a credit limit above 3000?
+
+SELECT `customerName`,`country`,`creditLimit` 
+FROM `customers` 
+WHERE `country` != 'USA' and `creditLimit` > 3000
+
+
+8) Which products has less than a thousand in stock
+or a productLine of planes
+
+SELECT `productName`,`quantityInStock`,`productLine` 
+FROM `products` 
+WHERE `quantityInStock` < 1000 
+or `productLine` = 'planes' 
+order by `productLine`, `quantityInStock`
+
+
+9) Show profit per product (MSRP - Buy price)
+
+SELECT `productName` as Product_Name, 
+(`MSRP`-`buyPrice`) as Product_Profit 
+FROM `products`
+
+-- Profit per product line
+SELECT `productLine` as Product_Line, 
+FORMAT((`MSRP`-`buyPrice`),2) as Profit 
+FROM `products` 
+group by `productLine` 
+order by profit
+
+
+10) Compute the subtotal from the orderdetails tables
+as quantityOrdered * priceEach columns.
+Name this column as subtotal.
+
+SELECT od.`orderNumber`, 
+p.`productName` as Product_Name, 
+format((od.`quantityOrdered`*od.`priceEach`),2) as Subtotal 
+FROM `orderdetails` as od 
+join `products` as p 
+on p.`productCode` = od.`productCode` 
+order by od.`orderNumber`, p.`productName` asc, 
+subtotal desc
+
+
+11) Total revenue per product
+
+SELECT p.`productName` as Product, 
+(format(sum(od.`quantityOrdered`*od.`priceEach`),2)) as Revenue 
+FROM `orderdetails` as od join `products` as p 
+on p.`productCode` = od.`productCode` 
+group by p.`productCode` 
+order by p.`productName`
+
+
+12) First names and last names of employees
+who have office in Tokyo
+
+SELECT e.`firstName` as First_Name
+,e.`lastName` as Last_Name
+,o.`city` as Office_City
+FROM `employees` as e 
+join `offices` as o 
+on e.`officeCode` = o.`officeCode` 
+WHERE o.`city` = 'Tokyo'
+
+
+13) Customers being served by Leslie Thompson
+
+SELECT c.`customerName` as Customer, 
+CONCAT(c.`contactFirstName`,' ',c.`contactLastName`) as Contact_Person, 
+CONCAT(e.`firstName`,' ',e.`lastName`) as Sales_Rep 
+FROM `customers` as c JOIN `employees` as e 
+on c.`salesRepEmployeeNumber` = e.`employeeNumber` 
+WHERE e.`lastName` = 'Thompson' 
+and e.`firstName` = 'Leslie'
+
+
+14) What products did the customer 
+Baane Mini Imports ordered
+
+SELECT c.`customerName` as Customer
+,p.`productName` as Product
+,od.`priceEach` as Unit_Price
+FROM `orderdetails` as od
+,`products` as p
+,`orders` as o
+,`customers` as c
+WHERE od.`orderNumber` = o.`orderNumber`
+and o.`customerNumber` = c.`customerNumber`
+and od.`productCode` = p.`productCode`
+and c.`customerName` = 'Baane Mini Imports'
+order by p.`productName`
+
+15) List of employees who are 
+in the same country as the customers they serve
+
