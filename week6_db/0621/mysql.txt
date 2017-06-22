@@ -1,5 +1,6 @@
 CMD
-  cd users\day4\desktop\xampp\mysql\bin\
+  cd users\day4\
+  cd desktop\xampp\mysql\bin\
   mysql -u root
 
   show databases;
