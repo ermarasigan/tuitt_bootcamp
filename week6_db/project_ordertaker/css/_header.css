@@ -1,0 +1,76 @@
+/*Formatting for header partial*/
+
+#js-header {
+	/*padding: 10px 0;*/
+}
+
+.navbar {
+	margin-bottom: 0;
+	background: transparent;
+	border: 1px solid transparent;
+}
+
+.navbar-nav li a {
+		padding: 0;
+}
+
+#js-signup,
+#js-login,
+#js-brand {
+	padding: 20px 15px;
+}
+
+#js-brand {
+	margin-left: -5px;
+	font-family: baloo; 
+	font-size: 3em;
+	color: red;
+}
+#js-brand:focus {
+	color: red;
+}
+
+#js-brand:hover {
+	color: orange;
+}
+
+#js-login {
+	margin-right: 30px;
+}
+
+#myNavbar > ul > li > a, 
+#nav-pages  > ul > li > a {
+	font-family: "poppinsmedium";
+	font-size: 1.5em;
+	color: white;
+	border: 1px solid transparent;
+	outline:none!important
+}
+
+#myNavbar > ul > li > a:active,
+#myNavbar > ul > li > a:hover{
+color: orange;
+}
+
+.sticky {
+	position: fixed;
+	top:0;
+	background: red;
+	color: white;
+}
+
+.navbar-default .navbar-nav>.active>a , 
+.navbar-default .navbar-nav>.active>a:hover {
+	color: orange !important;
+	background: transparent;
+}
+
+.modal-title {
+	color: orange;
+	font-size: 2em;
+}
+
+/*Format for bigger screens*/
+/*@media screen and (min-width: 768px) {
+	
+}*/

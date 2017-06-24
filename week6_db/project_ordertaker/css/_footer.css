@@ -1,0 +1,63 @@
+/*CSS format for Footer partial*/
+
+footer {
+	background: #e32929;
+	min-height: 100px;
+	padding: 20px;
+	box-sizing: border-box;
+	position: relative;
+	border: 10px solid #e32929;
+}
+
+/*formatting for social media icons*/
+.icons-footer {
+	position: absolute;
+	top: 20%;
+	left: 50%;
+	transform: translateX(-50%);
+}
+.icons-footer > a > span {
+	font-family: "ElegantIcons";
+	color: white;
+	font-size: 2em;
+	padding: 0 5px;
+	text-align: center;
+}
+.icons-footer > a:hover {
+    opacity:0.5;
+    display: inline-block;
+	text-decoration: none;
+}
+.icons-footer > a:visited, 
+.icons-footer > a:link,
+.icons-footer > a:active {
+	text-decoration: none;
+}
+
+/*formatting for footer text*/
+.text-footer {
+	position: absolute;
+	top: 60%;
+	padding: 0;
+	left: 50%;
+	transform: translateX(-50%);
+	text-align: center;
+}
+.text-footer > ul {
+	padding: 0;
+	margin: 0;
+}
+.text-footer > ul > li {
+	display: block;
+	font-size: 0.5em;
+	font-family: poppinslight;
+	color: white;
+}
+
+/*bigger fonts for bigger screen*/
+@media screen and (min-width: 768px) {
+  .text-footer > ul > li {
+    font-size: 1em;
+    display: inline-block;
+  }
+}

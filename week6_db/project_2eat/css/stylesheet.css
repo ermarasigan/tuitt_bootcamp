@@ -1,0 +1,246 @@
+/*Stylesheet applied for all pages*/
+
+/*Fastfood color palette*/
+/*#982121 darkred*/
+/*#ff611d orange*/
+/*#e32929 red*/
+/*#ffb80e yellow*/
+/*#813531 brown*/
+
+/*No white margin for html body*/
+body {
+	margin: 0;
+}
+
+/*This is a fix for white space in right side*/
+/*html, body {
+  overflow-x: hidden;
+}*/
+
+/*Initially hidden*/
+#countdown,
+#js-pages{
+	display: none;
+}
+
+/*General font formatting*/
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	/*color: white; */
+	margin:0; 
+	padding:0;
+}
+h1 {
+	font-family: baloo; 
+	color: white;
+}
+h2 {
+	font-family: poppinsbold; 
+	font-size: 60px;
+}
+h3 {
+	font-family: poppinssemibold; 
+}
+h4 {
+	font-family: poppinsmedium; 
+}
+h5 {
+	font-family: poppinsregular; 
+}
+h6 {
+	font-family: poppinslight; 
+	font-size: 3em;
+}
+
+
+/*Welcome box formatting*/
+#welcomebg {
+	width: 100%;
+	background-image: url("../img/background/chicken_bg_240.gif");
+	opacity: 0.8;
+	background-size: cover;
+	background-repeat: no-repeat;
+	position: relative;
+}
+
+#welcomebg > div {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%,-50%);
+	text-align: center;
+}
+/*specify aspect ratio h/w*/
+#welcomebg:before {
+	content: "";
+	float: left;
+	padding-bottom: 50%;
+	clear: both;
+}
+/*this is a clearfix. */
+#welcomebg:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.clear:before {
+    content: "";
+    display: block;
+    clear: both;
+}
+
+/*format for bigger screens */
+@media screen and (min-width: 768px) {
+	#welcomebg {
+	background-image: url("../img/background/chicken_bg_480.gif");
+	}
+	
+}
+
+
+/*Formatting for header partial*/
+
+#js-header {
+	/*padding: 10px 0;*/
+}
+
+.navbar {
+	margin-bottom: 0;
+	/*background: transparent;*/
+	/*border: 1px solid transparent;*/
+	/*background: limegreen;*/
+	background: rgb(103,209,227);
+	border: 1px solid rgb(103,209,227);
+}
+
+.navbar-nav li a {
+		/*padding: 0;*/
+}
+
+#js-signup,
+#js-login,
+#js-brand {
+	padding: 10% 15px;
+}
+
+
+
+#js-signup,
+#js-login {
+	font-size: 4vmax;
+}
+
+.navbar-default .navbar-header {
+	/*display: table-cell !important ;*/
+}
+
+#js-brand {
+	margin-left: -5px;
+	font-family: baloo; 
+	font-size: 5vmax;
+	vertical-align: middle;
+	/*color: red;*/
+	color: white;}
+#js-brand:focus {
+	/*color: red;*/
+}
+
+#js-brand:hover {
+	/*color: orange;*/
+	color: #7067e3;
+	/*color: rgb(152,46,28);*/
+}
+
+#js-login {
+	margin-right: 30px;
+}
+
+#myNavbar > ul > li > a, 
+#nav-pages  > ul > li > a {
+	font-family: "poppinsmedium";
+	/*font-size: 1.5em;*/
+	font-size: 2vmax;
+	color: white;
+	border: 1px solid transparent;
+	outline:none!important
+}
+
+#myNavbar > ul > li > a:active,
+#myNavbar > ul > li > a:hover{
+/*color: orange;*/
+	color: #7067e3;
+}
+
+.sticky {
+	position: fixed;
+	top:0;
+	background: red;
+	color: white;
+}
+
+.navbar-default .navbar-nav>.active>a , 
+.navbar-default .navbar-nav>.active>a:hover {
+	color: orange !important;
+	background: transparent;
+}
+
+.modal-title {
+	color: orange;
+	font-size: 2em;
+}
+
+
+/*formatting for burger icon*/
+.navbar-default .navbar-toggle .icon-bar {
+  background-color: white;
+}
+
+.itembox{
+	/*background: rgba(255,97,29,0.5);*/
+	/*background: #e3a967;*/
+	background: #e36b67;
+	/*background:#ff611d;
+	opacity: 0.5;*/
+	/*width: 300px;*/
+	width :80% ;
+	text-align: center;
+	color: white;
+	padding: 10px;
+	margin: 10px;
+	box-sizing: content-box;
+	/*font-family: cursive;*/
+	font-family: poppinsregular;
+	font-size: 3em;
+	float: left;
+	border-radius: 10px;
+	display: inline-block;
+	min-height: 200px;
+	/*height: auto;*/
+}
+
+
+/*Format for bigger screens*/
+@media screen and (min-width: 768px) {
+	.itembox{
+		width :40% ;
+	}
+
+	#js-brand {
+	padding-top: 22px;
+	}
+}
+
+.deletebox { 
+	/*width: 80%;*/
+	background: #e3a967;
+}
+
+a,
+a:hover {
+	text-decoration: none;
+}

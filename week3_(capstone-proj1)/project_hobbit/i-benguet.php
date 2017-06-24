@@ -52,7 +52,7 @@
                     <th>Activity</th>
                   </tr>
                 </thead>
-                <tbody contenteditable="true">
+                <tbody>
                   <tr>
                     <td>Day 0</td>
                     <td>10pm</td>

@@ -3,6 +3,7 @@
 	$string = file_get_contents('json/users.json');
 	$usercreds = json_decode($string, true);
 	$usernames = array_unique(array_column($usercreds,'username'));
+	// var_dump($usercreds);
 
 	if(isset($_POST['create'])){
 		echo add_acct($usercreds);
