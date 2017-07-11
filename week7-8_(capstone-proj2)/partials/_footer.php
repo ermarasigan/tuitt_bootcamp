@@ -81,10 +81,10 @@
 
   <!-- Javascript for karaoke text -->
   <?php
-    if($title=='Add song') {
+    if($title=='Karauke Add song') {
       echo '<script src="js/songAdd.js"></script>';
     }
-    if($title=='Play song') {
+    if($title=='Karauke Play song') {
       echo '<script src="js/songPlay.js"></script>';
     }
   ?>

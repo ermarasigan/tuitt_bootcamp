@@ -3,7 +3,7 @@
 
   function get_title() {
   	global $title;
-  	$title='Play song';
+  	$title='Karauke Play song';
   	echo $title;
   }
 ?>
