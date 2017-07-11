@@ -14,6 +14,7 @@
 <!-- Main Section -->
 <main class="container" id="addsongbg">
 	
+	<!-- Retrieve song details for playing -->
 	<div class="row">
 		<h2 class="text-center">
 			<?php
@@ -46,6 +47,7 @@
 		</div>
 	</div>
 
+	<!-- Buttons for play, stop -->
 	<div class="row">		
 		<div class="text-center">
 			<button id='togglebtn' class='btn btn-default btn-primary' type='submit' 
@@ -61,6 +63,7 @@
 		</div>
 	</div>
 
+	<!-- Canvas where karaoke text is rendered -->
 	<canvas id="draw-pad" width="700" height="120">
 	</canvas>
 </main>

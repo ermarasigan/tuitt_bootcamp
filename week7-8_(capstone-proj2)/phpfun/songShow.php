@@ -1,5 +1,7 @@
 <?php
 
+  // Only one json file for all visitors searches
+  // For each logged in user, one json file each for searches
   function searchShow(){
 
     $array = [];
@@ -21,6 +23,7 @@
     columnDisplay($array,'search-column');
   }
 
+  // Get picks per user that is not logically deleted
   function userpickShow(){
 
     global $conn;
@@ -44,6 +47,7 @@
     columnDisplay($array,'userpick-column');
   }
 
+  // Get top picks for all users
   function allpickShow(){
 
     global $conn;
@@ -68,6 +72,7 @@
   }
 
 
+  // Get details, and format and display column
   function columnDisplay($array,$scrollclass){
 
     $col_cnt = 0;
@@ -75,6 +80,7 @@
     foreach ($array as $key) {
       global $conn;
 
+      // Determine if song is already picked
       $picked='';
       if(isset($_SESSION['userid'])){
         $userid = $_SESSION['userid'];
@@ -89,6 +95,7 @@
         }
       }
 
+      // Get song details
       $sql = "SELECT title, artist, year, bpm FROM songs 
               WHERE id = '$key'
               ";
@@ -99,6 +106,7 @@
         while($row = mysqli_fetch_assoc($result)) {
           extract($row);
 
+          // Compute for bootstrap column width
           $col_cnt += 1;
 
           $colwidth = '';
@@ -136,7 +144,8 @@
           } else {
             $colwidth .= " col-md-12";
           } 
-       
+          
+          // Generate the song box
           echo
             "<div class='$colwidth song-column $scrollclass'>
 

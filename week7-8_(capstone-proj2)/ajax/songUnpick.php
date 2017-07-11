@@ -11,6 +11,7 @@
 		echo 'notloggedin';
 	}
 
+	// If logged in, user can logically delete pick
 	if ($userid > '') {
 		global $conn;
 

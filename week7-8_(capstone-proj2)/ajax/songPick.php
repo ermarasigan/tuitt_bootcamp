@@ -11,6 +11,7 @@
 		echo 'notloggedin';
 	}
 
+	// If logged in, user can update/insert to picks
 	if ($userid > '') {
 		global $conn;
 

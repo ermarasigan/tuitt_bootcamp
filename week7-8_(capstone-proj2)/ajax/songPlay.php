@@ -11,6 +11,7 @@
 		echo 'notloggedin';
 	}
 
+  // If logged in, song details are saved to be displayed for playing
 	$sql = "SELECT title, artist, year, bpm FROM songs 
       WHERE id = '$songid'
       ";

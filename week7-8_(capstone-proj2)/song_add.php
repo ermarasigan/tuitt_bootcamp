@@ -28,6 +28,7 @@
 		</h2>
 	</div>
 
+	<!-- Song details inputs for add/update -->
 	<div class="row">
 		<div class="col-md-4 col-lg-4">
 			<div class="form-group">
@@ -47,10 +48,12 @@
             </div>
          </div>
 
+         <!-- Text area input for chords and lyrics -->
 		<div class="col-md-6 col-lg-6">
 			<textarea id="textarea" rows="8" cols="30" placeholder="Type chords and lyrics in alternate lines. Preview partially by selecting lines." required="required"></textarea>
 		</div>
 		
+		<!-- Buttons for preview, play, stop, save -->
 		<div class="col-md-2 col-lg-2 text-center">
 			<button id="previewbtn" type="button" class='btn btn-default btn-info' 
 					onclick="previewLyrics()">Preview</button>
@@ -68,6 +71,7 @@
 		</div>
 	</div>
 
+	<!-- Canvas where karaoke text is rendered -->
 	<canvas id="draw-pad" width="700" height="120">
 	</canvas>
 </main>
