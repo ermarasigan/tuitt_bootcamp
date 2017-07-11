@@ -55,7 +55,8 @@
 	  			}
 
 	  			if($_SESSION['role']=='admin') {
-	  				if($title=='Karauke Home page') {
+	  				if($title=='Karauke Home page' || 
+	  				   $title == 'Karauke (localhost)') {
 		  				echo '<li>
 						          <a  id="user-action" href="song_add.php" class="text-right">
 							         <span class="glyphicon glyphicon-music"></span> 
@@ -87,9 +88,10 @@
 	  				($title == 'Karauke Home page' || 
 	  				 $title == 'Karauke (localhost)')) {
 	          		echo '<li>
-					          <a  id="user-action" href="#userpicks" class="text-right">
-						         <span class="glyphicon glyphicon-star"></span> 
-						         My Picks
+					          <a  id="user-action" href="#userpicks" class="pick-anchor text-right"
+					          		onclick="iconPick();">
+						         <span class="glyphicon glyphicon-star" id="pick-icon"></span> 
+						         <span id="pick-text">My Picks</span>
 					          </a>
 				         </li>';
 	          	} 	          	

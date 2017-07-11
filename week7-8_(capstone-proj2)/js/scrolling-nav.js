@@ -96,3 +96,18 @@ $(function() {
         scale: 0.3,
         distance: '0px'
     }, 300);
+
+// When in user pick section, change icon to home
+function iconPick(){
+    if($('#pick-text').text()=='My Picks'){
+        $('#pick-text').text('Home')
+        $('#pick-icon').removeClass('glyphicon-star')
+        $('#pick-icon').addClass('glyphicon-home')
+        $('.pick-anchor').attr('href','#userpicks')
+    } else {
+        $('#pick-text').text('My Picks')
+        $('#pick-icon').removeClass('glyphicon-home')
+        $('#pick-icon').addClass('glyphicon-star')
+        $('.pick-anchor').attr('href','#')
+    }
+}
