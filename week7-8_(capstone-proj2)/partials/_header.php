@@ -55,7 +55,7 @@
 	  			}
 
 	  			if($_SESSION['role']=='admin') {
-	  				if($title=='Home page') {
+	  				if($title=='Karauke Home page') {
 		  				echo '<li>
 						          <a  id="user-action" href="song_add.php" class="text-right">
 							         <span class="glyphicon glyphicon-music"></span> 
@@ -72,7 +72,7 @@
 	  				}
 	          	}
 
-	  			if($_SESSION['role']>'' && $title == 'Home page') {
+	  			if($_SESSION['role']>'' && $title == 'Karauke Home page') {
 	          		echo '<li>
 					          <a  id="user-action" href="#userpicks" class="text-right">
 						         <span class="glyphicon glyphicon-star"></span> 
