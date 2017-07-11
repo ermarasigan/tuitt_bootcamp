@@ -218,8 +218,8 @@ function songOverride(){
 function songAdd(){
   swal(
   {
-    title: "New Song",
-    text: "Submit to save to database",
+    title: "Add new song?",
+    text: title + " - " + artist + " (" + year + ")",
     type: "info",
     showCancelButton: true,
     closeOnConfirm: false,
