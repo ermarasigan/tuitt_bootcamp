@@ -83,7 +83,9 @@
 	  				}
 	          	}
 
-	  			if($_SESSION['role']>'' && $title == 'Karauke Home page') {
+	  			if($_SESSION['role']>'' && 
+	  				($title == 'Karauke Home page' || 
+	  				 $title == 'Karauke (localhost)')) {
 	          		echo '<li>
 					          <a  id="user-action" href="#userpicks" class="text-right">
 						         <span class="glyphicon glyphicon-star"></span> 
