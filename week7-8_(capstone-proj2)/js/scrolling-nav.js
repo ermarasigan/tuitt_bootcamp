@@ -1,12 +1,58 @@
 //jQuery to collapse the navbar on scroll
+// $(window).scroll(function() {
+//     if ($(".navbar").offset().top > 50) {
+//         $("#js-header").addClass("top-nav-collapse");
+//     } else {
+//         $("#js-header").removeClass("top-nav-collapse");
+//     }
+// });
 
-$(window).scroll(function() {
-    if ($(".navbar").offset().top > 50) {
-        $("#js-header").addClass("top-nav-collapse");
-    } else {
-        $("#js-header").removeClass("top-nav-collapse");
-    }
+// On mobile landscape, remove fixed header
+$(function() {
+    mobileOrient();
+
+    $(window).resize(function(){
+        mobileOrient();
+    })
 });
+
+function mobileOrient() {
+    // Mobile Landscape
+    if( ($(window).height() < $(window).width()) &&
+        ($(window).height() < 768) ) {
+        
+        $('#js-header').removeClass('navbar-fixed-top')
+        if(typeof $('#welcomebg').css('margin-top') != 'undefined'){
+            $('#welcomebg').css('margin-top',0)
+        }
+        if(typeof $('#addsongbg').css('margin-top') != 'undefined'){
+            $('#addsongbg').css('margin-top',0)
+        }
+    } 
+    // Mobile Portrait
+    if( ($(window).height() > $(window).width()) &&
+        ($(window).width() < 768) ) {
+
+        $('#js-header').addClass('navbar-fixed-top')
+        if(typeof $('#welcomebg').css('margin-top') != 'undefined'){
+            $('#welcomebg').css('margin-top',55)
+        }
+        if(typeof $('#addsongbg').css('margin-top') != 'undefined'){
+            $('#addsongbg').css('margin-top',55)
+        }
+    }
+    // Restore web default
+    if( ($(window).height() >= 768) ||
+        ($(window).width() >= 768)) {
+        $('#js-header').addClass('navbar-fixed-top')
+        if(typeof $('#welcomebg').css('margin-top') != 'undefined'){
+            $('#welcomebg').css('margin-top',0)
+        }
+        if(typeof $('#addsongbg').css('margin-top') != 'undefined'){
+            $('#addsongbg').css('margin-top',0)
+        }
+    }
+}
 
 //jQuery for page scrolling feature - requires jQuery Easing plugin
 function easeSearch() {
