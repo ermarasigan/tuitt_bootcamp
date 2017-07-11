@@ -224,6 +224,12 @@ a:hover {
 	}
 }
 
+@media screen and (max-height: 400px) {
+	#welcometext {
+		font-size: 9vmin;
+	}
+}
+
 /*Add song background*/
 #addsongbg {
 	min-height: 100%;
