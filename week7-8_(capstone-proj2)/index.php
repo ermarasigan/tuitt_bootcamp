@@ -3,7 +3,12 @@
 
   function get_title() {
   	global $title;
-  	$title='Home page';
+    global $host;
+    if ($host=='localhost') {
+  	  $title='Karauke (localhost)';
+    } else {
+      $title='Karauke Home page';
+    }
   	echo $title;
   }
 ?>
