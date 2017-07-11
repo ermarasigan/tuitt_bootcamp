@@ -72,6 +72,17 @@
 	  				}
 	          	}
 
+	          	if($_SESSION['role']=='regular') {
+	  				if($title=='Karauke Play song') {
+		  				echo '<li>
+						          <a  id="user-action" href="index.php" class="text-right">
+							         <span class="glyphicon glyphicon-home"></span> 
+							         Home
+						          </a>
+					         </li>';
+	  				}
+	          	}
+
 	  			if($_SESSION['role']>'' && $title == 'Karauke Home page') {
 	          		echo '<li>
 					          <a  id="user-action" href="#userpicks" class="text-right">
