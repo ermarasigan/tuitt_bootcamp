@@ -32,7 +32,8 @@
     $userid = $_SESSION['userid'];
     $sql = "SELECT songid FROM picks 
             WHERE deleted is null
-            AND userid = $userid 
+            AND userid = $userid
+            AND songid is not null
             ";
 
     $result = mysqli_query($conn,$sql);
@@ -55,6 +56,7 @@
 
     $sql = "SELECT songid, count(songid) FROM picks 
             WHERE deleted is null
+            AND songid is not null
             GROUP BY songid
             ORDER BY count(songid) DESC LIMIT 10
             ";
@@ -90,8 +92,10 @@
             AND deleted is null
             ";
         $result = mysqli_query($conn,$sql);
-        if(mysqli_num_rows($result) > 0){
-          $picked='yes';
+        if($result){
+          if(mysqli_num_rows($result) > 0) {
+            $picked='yes';
+          }
         }
       }
 
@@ -153,12 +157,7 @@
               <h5> $artist </h5>
               <h5> ($year) </h5>
             
-              <div class='center pickbox'";
-          if($_SESSION['role']=='admin'){
-            echo "id='$key' onclick='songUpdate(this.id);' 
-                  title='Click box to update song' ";
-          }
-          echo ">";
+              <div class='center pickbox' style='position: relative'>";
 
           if($picked=='yes'){
             echo "
@@ -175,11 +174,20 @@
           echo "
                 <button id='$key' class='btn btn-md btn-default' onclick='songPlay(this.id);'>
                 <span class='glyphicon glyphicon-play'></span>
-                </button>";             
+                </button>";     
 
           if($_SESSION['role']=='admin'){
             echo "
-                <button id='$key' class='btn btn-md btn-default' onclick='songDelete(this.id);'>
+                <button id='$key' class='btn btn-md btn-default' onclick='songEdit(this.id);'>
+                  <span class='glyphicon glyphicon-edit'></span>
+                </button>";
+          }        
+
+          if($_SESSION['role']=='admin'){
+            echo "
+                <button id='$key' class='btn btn-md btn-danger'
+                   style='position: absolute; top: 60px; left: 69px;'
+                   onclick='songDelete(this.id);'>
                   <span class='glyphicon glyphicon-trash'></span>
                 </button>";
           }

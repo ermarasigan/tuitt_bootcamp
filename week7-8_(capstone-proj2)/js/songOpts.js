@@ -132,7 +132,7 @@ function songDelete(id){
 }
 
 // Update song
-function songUpdate(id){
+function songEdit(id){
   $.post("ajax/songPlay.php?id="+id,
   {
   },

@@ -142,11 +142,7 @@ function saveSong() {
     }
   } 
 
-  songUpdate();
-}
-
-// Override song if it exists
-function songUpdate(){
+  // Update song in db thru ajax
   swal(
   {
     title: "Update song?" ,
