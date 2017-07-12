@@ -18,12 +18,19 @@
 	<div class="row">
 		<h2 class="text-center">
 			<?php
-				$playtitle 	= $_SESSION['playtitle'];
-      			$playartist	= $_SESSION['playartist'];
-      			$playyear	= $_SESSION['playyear'];
-      			$playbpm	= $_SESSION['playbpm'];
-      			$playid		= $_GET['id'];
-      			echo $playtitle . " - " . $playartist . " (" . $playyear . ")";
+				if(isset($_SESSION['username'])) {
+					// Check if lyric file exists
+		      		$playid		= $_GET['id'];
+					$filename = "json/songs/song" . $playid . "_lyrics.json";
+
+					if(is_file($filename)) {
+						$playtitle 	= $_SESSION['playtitle'];
+		      			$playartist	= $_SESSION['playartist'];
+		      			$playyear	= $_SESSION['playyear'];
+		      			$playbpm	= $_SESSION['playbpm'];
+		      			echo $playtitle . " - " . $playartist . " (" . $playyear . ")";
+		      		}
+	      		}
 			?>
 		</h2>
 	</div>
@@ -32,16 +39,18 @@
 		<br>
 		<div class="text-center">
 		<?php 
-			$playchords=[];
+			if(isset($_SESSION['username'])) {
+				$playchords=[];
 
-			// Get song chords and display
-			$filename = "json/songs/song" . $playid . "_chords.json";
-			fopen($filename,'a');
-			$string = file_get_contents($filename);
+				// Get song chords and display
+				$filename = "json/songs/song" . $playid . "_chords.json";
 
-			if($string != null) {
-				$playchords = json_decode($string, true);
-				showChords('small',$playchords);
+				if(is_file($filename)) {
+					fopen($filename,'r');
+					$string = file_get_contents($filename);
+					$playchords = json_decode($string, true);
+					showChords('small',$playchords);
+				}
 			}
 		?>
 		</div>
@@ -55,10 +64,20 @@
 			<button id='stopbtn' class='btn btn-default btn-default' type='submit' 
 					onclick='stopSong();'>Stop</button>
 			<?php
-				echo "
-				<input type='hidden' id='getid' value='$playid'>";
-				echo "
-				<input type='hidden' id='getbpm' value='$playbpm'>";
+				if(isset($_SESSION['username'])) {
+					echo "
+					<input type='hidden' id='getid' value='$playid'>";
+					if(isset($playbpm)){
+						echo "
+					<input type='hidden' id='getbpm' value='$playbpm'>";
+					} else {
+						echo "
+					Chosen song does not exist on database";
+					}
+				} else {
+					echo "
+					Log in to play song";
+				}
 			?>
 		</div>
 	</div>

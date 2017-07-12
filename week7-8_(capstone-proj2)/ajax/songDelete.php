@@ -14,17 +14,15 @@
     if(mysqli_affected_rows($conn) > 0) {
       // Delete chord file
       $filename = "../json/songs/song" . $deleteid . "_chords.json";
-      fopen($filename,'a');
-      $string = file_get_contents($filename);
-      if($string != null) {
+  
+      if(is_file($filename)) {
         unlink($filename);
       }
 
       // Delete lyric file
-      $filename = "../json/songs/song" . $deleteid . "_chords.json";
-      fopen($filename,'a');
-      $string = file_get_contents($filename);
-      if($string != null) {
+      $filename = "../json/songs/song" . $deleteid . "_lyrics.json";
+      
+      if(is_file($filename)) {
         unlink($filename);
       }
 

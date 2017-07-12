@@ -8,10 +8,10 @@
 
 	// Get details from json
 	$filename = "../json/songs/song" . $playid . "_chords.json";
-	fopen($filename,'a');
-	$string = file_get_contents($filename);
-
-	if($string != null) {
+	
+	if(is_file($filename)) {
+		fopen($filename,'r');
+		$string = file_get_contents($filename);
 		$playchords = json_decode($string, true);
 	} 
 	

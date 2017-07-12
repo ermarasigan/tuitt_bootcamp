@@ -55,8 +55,14 @@
 		
 		<!-- Buttons for preview, play, stop, save -->
 		<div class="col-md-2 col-lg-2 text-center">
-			<button id="previewbtn" type="button" class='btn btn-default btn-info' 
-					onclick="previewLyrics()">Preview</button>
+			<?php 
+				if ($_SESSION['role']=='admin') {
+					echo "
+					<button id='previewbtn' type='button' class='btn btn-default btn-info' 
+							onclick='previewLyrics()'>Preview</button>
+							";
+				}
+			?>
 			<button id='togglebtn' class='btn btn-default btn-default' type='submit' 
 					onclick='toggleLyrics();'>Play</button>
 			<?php 
