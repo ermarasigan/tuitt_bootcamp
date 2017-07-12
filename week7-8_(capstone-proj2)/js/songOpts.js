@@ -131,6 +131,22 @@ function songDelete(id){
   });
 }
 
-
-
-
+// Update song
+function songUpdate(id){
+  $.post("ajax/songPlay.php?id="+id,
+  {
+  },
+  function(data,status){
+    if(data=='notloggedin'){
+      swal({
+        title:"Log in to play song"
+      },function(isConfirm){
+        if(isConfirm){
+          $('#login_modal').modal('show')
+        }
+      });
+    } else {
+      document.location = "song_update.php?id="+id
+    }
+  });
+}

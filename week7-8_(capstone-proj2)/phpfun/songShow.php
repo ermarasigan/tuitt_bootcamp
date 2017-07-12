@@ -153,7 +153,12 @@
               <h5> $artist </h5>
               <h5> ($year) </h5>
             
-              <div class='center pickbox'>";
+              <div class='center pickbox'";
+          if($_SESSION['role']=='admin'){
+            echo "id='$key' onclick='songUpdate(this.id);' 
+                  title='Click box to update song' ";
+          }
+          echo ">";
 
           if($picked=='yes'){
             echo "

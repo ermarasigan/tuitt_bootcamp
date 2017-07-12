@@ -76,7 +76,7 @@
   <!-- Ajax Function to delete account -->
   <script src="js/acctDelete.js"></script>
 
-  <!-- Ajax Functions for song options (play, delete, pick) -->
+  <!-- Ajax Functions for song options (play, delete, pick, update) -->
   <script src="js/songOpts.js"></script>
 
   <!-- Javascript for karaoke text -->
@@ -86,6 +86,9 @@
     }
     if($title=='Karauke Play song') {
       echo '<script src="js/songPlay.js"></script>';
+    }
+    if($title=='Karauke Update song') {
+      echo '<script src="js/songUpdate.js"></script>';
     }
   ?>
 

@@ -3,7 +3,7 @@
 
   function get_title() {
   	global $title;
-  	$title='Karauke Add song';
+  	$title='Karauke Update song';
   	echo $title;
   }
 ?>
@@ -16,13 +16,45 @@
 	<div class="row">
 		<h2 class="text-center">
 			<?php 
+				$playlines=[];
+
 				if(!isset($_SESSION['role'])){
 					$_SESSION['role']='';
 				}
 				if ($_SESSION['role']=='admin') {
-					echo "Add Song";
+					echo "Update Song";
+					$playid		= $_GET['id'];
+					$playtitle 	= $_SESSION['playtitle'];
+		      		$playartist	= $_SESSION['playartist'];
+		      		$playyear	= $_SESSION['playyear'];
+		      		$playbpm	= $_SESSION['playbpm'];
+
+		      		// Get song chords 
+		      		$playchords=[];
+					$filename = "json/songs/song" . $playid . "_chords.json";
+					if(is_file($filename)) {
+						fopen($filename,'r');
+						$string = file_get_contents($filename);
+						$playchords = json_decode($string, true);
+					}
+
+					// Get song chords 
+		      		$playlyrics=[];
+					$filename = "json/songs/song" . $playid . "_lyrics.json";
+					if(is_file($filename)) {
+						fopen($filename,'r');
+						$string = file_get_contents($filename);
+						$playlyrics = json_decode($string, true);
+					}
+
+					for($i=0;$i<sizeof($playlyrics);$i++) {
+						array_push($playlines, $playchords[$i]);
+						array_push($playlines, $playlyrics[$i]);
+					}
+
 				} else {
 					echo "Preview Song";
+
 				}
 			?>
 		</h2>
@@ -32,17 +64,33 @@
 	<div class="row">
 		<div class="col-md-4 col-lg-4">
 			<div class="form-group">
-              <input type="text" class="form-control" id="songtitle" name="songtitle" placeholder="Song Title">
+              <input type="text" class="form-control" id="songtitle" name="songtitle" placeholder="Song Title"
+              <?php 
+              	echo "value='$playtitle'";
+              ?>
+              >
               <label for="songartist"></label>
-              <input type="text" class="form-control" id="songartist" name="songartist" placeholder="Song Artist">
+              <input type="text" class="form-control" id="songartist" name="songartist" placeholder="Song Artist"
+              <?php 
+              	echo "value='$playartist'";
+              ?>
+              >
               <div class="row">
               	<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
               			<label for="songyear"></label>
-		            	<input id="songyear" class="form-control" type="number" min=1900 placeholder="Song Year">
+		            	<input id="songyear" class="form-control" type="number" min=1900 placeholder="Song Year"
+		            	<?php 
+			              	echo "value=$playyear";
+			            ?>
+		            	>
 		        </div>
 		        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
 		        		<label for="songbpm"></label>
-		            	<input id="songbpm" class="form-control" type="number" min=0 placeholder="Beats Per Minute">
+		            	<input id="songbpm" class="form-control" type="number" min=0 placeholder="Beats Per Minute"
+		            	<?php 
+			              	echo "value=$playbpm";
+			            ?>
+		            	>
 		       	</div>
 		      </div>
             </div>
@@ -50,7 +98,9 @@
 
          <!-- Text area input for chords and lyrics -->
 		<div class="col-md-6 col-lg-6">
-			<textarea id="textarea" rows="8" cols="30" placeholder="Type chords and lyrics in alternate lines. Preview partially by selecting lines." required="required"></textarea>
+			<textarea id="textarea" rows="8" cols="30" placeholder="Type chords and lyrics in alternate lines. Preview partially by selecting lines." required="required"><?php 
+              	foreach ($playlines as $playline) echo "\n" . $playline;
+            ?></textarea>
 		</div>
 		
 		<!-- Buttons for preview, play, stop, save -->
@@ -68,6 +118,7 @@
 			<?php 
 				if ($_SESSION['role']=='admin') {
 					echo "
+					<input id='songid' type='hidden' value='$playid'>
 					<button id='savebtn' class='btn btn-default btn-success' type='submit' 
 							onclick='saveSong();'>Save</button>";
 				}

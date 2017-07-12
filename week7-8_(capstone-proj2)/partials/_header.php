@@ -60,7 +60,7 @@
 		  				echo '<li>
 						          <a  id="user-action" href="song_add.php" class="text-right">
 							         <span class="glyphicon glyphicon-music"></span> 
-							         Update Songs 
+							         Add Song 
 						          </a>
 					         </li>';
 	  				} else {
