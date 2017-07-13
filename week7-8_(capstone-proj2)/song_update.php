@@ -38,7 +38,7 @@
 						$playchords = json_decode($string, true);
 					}
 
-					// Get song chords 
+					// Get song lyrics 
 		      		$playlyrics=[];
 					$filename = "json/songs/song" . $playid . "_lyrics.json";
 					if(is_file($filename)) {

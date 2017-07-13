@@ -3,6 +3,7 @@
 // Initial state
 $(document).ready(function() {
   $("#stopbtn").hide();
+  $("#songtext").hide();
   $("#draw-pad").width($(window).width()-30);
 
   // Get song id and bpm from song_play.php hidden inputs
@@ -35,6 +36,16 @@ $(document).ready(function() {
     "json"
   );
 });
+
+function readText(){
+  if($("#viewbtn").html()=='Read') {
+    $("#songtext").show();
+    $("#viewbtn").html('Hide'); 
+  } else {
+    $("#songtext").hide();
+    $("#viewbtn").html('Read'); 
+  } 
+}
 
 // Responsive canvas size
 $(document).ready(function() {
