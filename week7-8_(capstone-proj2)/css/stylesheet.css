@@ -371,9 +371,9 @@ footer {
 	padding-bottom: 40px;
 }
 
-.song-column div button,
-.pick-column div button{
-	margin: 80px 10px;
+.song-column button,
+.pick-column button{
+	margin: 10px 5px;
 }
 
 .song-column h4,
@@ -396,5 +396,5 @@ footer {
 	background-size: cover;
 	margin: 0 auto; 
 	width: 200px; 
-	min-height: 200px;
+	height: 200px;
 }

@@ -2,7 +2,7 @@
 
 	session_start();
 	require_once "../phpfun/connectDB.php";
-
+	
 	$title 	= $_POST['title'];
 	$artist	= $_POST['artist'];
 	$year  	= $_POST['year'];
@@ -10,7 +10,6 @@
 	$chords	= $_POST['chords'];
 	$lyrics	= $_POST['lyrics'];
 	$songid = $_POST['songid'];
-
 
 	// Prepared statements
     $stmt=mysqli_stmt_init($conn);

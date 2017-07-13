@@ -34,6 +34,9 @@
     }
 
     if($insertid>''){
+
+        $_SESSION['addid'] = $insertid;
+
     	// Write to json file (Chords)
     	$filename = "../json/songs/song" . $insertid . "_chords.json";
 

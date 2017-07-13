@@ -26,6 +26,33 @@ $(document).ready(function() {
   })
 });
 
+// For uploading optional image
+$(function() {
+
+  // We can attach the `fileselect` event to all file inputs on the page
+  $(document).on('change', ':file', function() {
+    var input = $(this),
+        numFiles = input.get(0).files ? input.get(0).files.length : 1,
+        label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
+    input.trigger('fileselect', [numFiles, label]);
+  });
+
+  // We can watch for our custom `fileselect` event like this
+  $(document).ready( function() {
+      $(':file').on('fileselect', function(event, numFiles, label) {
+
+          var input = $(this).parents('.input-group').find(':text'),
+              log = numFiles > 1 ? numFiles + ' files selected' : label;
+
+          if( input.length ) {
+              input.val(log);
+          } else {
+              if( log ) alert(log);
+          }
+      });
+  });
+});
+
 // Get selected text from input
 function getText(elem) {
     if(elem.tagName === "TEXTAREA" ||
@@ -245,6 +272,7 @@ function songAdd(){
               type: "success"
             },function(isConfirm){
               if(isConfirm){
+                $('#uploadimage').submit();
                 location.reload();
               }
             });
@@ -261,6 +289,35 @@ function songAdd(){
       });
     }
   });
+  $('#uploadimage').on('submit', (function(e){
+    $.ajax({
+        // Url to which the request is send
+        url: "ajax/imgAdd.php", 
+        // Type of request to be send, called as method
+        type: "POST",              
+        // Data sent to server, a set of key/value pairs (i.e. form fields and values)
+        data: new FormData($('#uploadimage')[0]), 
+        // The content type used when sending data to the server.
+        contentType: false,
+        // To unable request pages to be cached        
+        cache: false,   
+        // To send DOMDocument or non processed data file it is set to false           
+        processData:false,    
+        // A function to be called if request succeeds     
+        success: function(data)    
+        {
+          if(data>''){
+            setTimeout(function(){
+              swal({
+                title:"Database issue, contact admin",
+                text: "Song not updated (" + data + ")",
+                type: "error"
+              });
+            }, 1000);
+          }
+        }
+      });
+  }));
 }
 
 // shim layer with setTimeout fallback

@@ -150,53 +150,66 @@
           } 
           
           // Generate the song box
-          echo
-            "<div class='$colwidth song-column $scrollclass'>
-
-              <h4> $title </h4>
-              <h5> $artist </h5>
-              <h5> ($year) </h5>
-            
-              <div class='center pickbox' style='position: relative'>";
-
-          if($picked=='yes'){
-            echo "
-                <button id='$key' class='btn btn-md btn-default' onclick='songUnpick(this.id);'>
-                  <span class='glyphicon glyphicon-star'></span>
-                </button>";
-          } else {
-            echo "
-                <button id='$key' class='btn btn-md btn-default' onclick='songPick(this.id);'>
-                  <span class='glyphicon glyphicon-star-empty'></span>
-                </button>";
-          }
-
-          echo "
-                <button id='$key' class='btn btn-md btn-default' onclick='songPlay(this.id);'>
-                <span class='glyphicon glyphicon-play'></span>
-                </button>";     
-
-          if($_SESSION['role']=='admin'){
-            echo "
-                <button id='$key' class='btn btn-md btn-default' onclick='songEdit(this.id);'>
-                  <span class='glyphicon glyphicon-edit'></span>
-                </button>";
-          }        
-
-          if($_SESSION['role']=='admin'){
-            echo "
-                <button id='$key' class='btn btn-md btn-danger'
-                   style='position: absolute; top: 60px; left: 69px;'
-                   onclick='songDelete(this.id);'>
-                  <span class='glyphicon glyphicon-trash'></span>
-                </button>";
-          }
-
-          echo "
-              </div>
-            </div>";
+          songBox($colwidth,$scrollclass,$key,$title,$artist,$year,$bpm,$picked);
         }
       } 
     }
+  }
+
+  // Function to generate the song box
+  function songBox($colwidth,$scrollclass,$key,$title,$artist,$year,$bpm,$picked) {
+    echo
+    "<div class='$colwidth song-column $scrollclass'>
+
+      <h4> $title </h4>
+      <h5> $artist </h5>
+      <h5> ($year) </h5>
+    
+      <div class='center pickbox' ";
+
+      $songpic = "img/songs/song". $key . "_pic.jpg"; 
+      if(is_file($songpic)) {
+        echo "style='
+              background: url($songpic) no-repeat; 
+              background-size: cover;
+              background-position: center;
+              '";
+      }
+      echo ">
+      </div>";
+
+      if($_SESSION['role']=='admin'){
+        echo "
+            <button id='$key' title='Delete Song' class='btn btn-md btn-default'
+               onclick='songDelete(this.id);'>
+              <span class='glyphicon glyphicon-trash'></span>
+            </button>";
+      }
+
+      if($picked=='yes'){
+        echo "
+            <button id='$key' title='Remove Song from Picks' class='btn btn-md btn-default' onclick='songUnpick(this.id);'>
+              <span class='glyphicon glyphicon-star'></span>
+            </button>";
+      } else {
+        echo "
+            <button id='$key' title='Add Song to Picks' class='btn btn-md btn-default' onclick='songPick(this.id);'>
+              <span class='glyphicon glyphicon-star-empty'></span>
+            </button>";
+      }
+
+      echo "
+            <button id='$key' title='Play Song'  class='btn btn-md btn-default' onclick='songPlay(this.id);'>
+            <span class='glyphicon glyphicon-play'></span>
+            </button>";     
+
+      if($_SESSION['role']=='admin'){
+        echo "
+            <button id='$key' title='Update Song' class='btn btn-md btn-default' onclick='songEdit(this.id);'>
+              <span class='glyphicon glyphicon-edit'></span>
+            </button>";
+      }        
+      
+    echo "</div>";
   }
 ?>

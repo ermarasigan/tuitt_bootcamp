@@ -94,7 +94,24 @@
 		       	</div>
 		      </div>
             </div>
+            <div id="picupload" class="row">
+            	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+					<div class="input-group">
+		                <label class="input-group-btn">
+		                	<form id="uploadimage" action="" method="post" enctype="multipart/form-data">
+			                    <span class="btn btn-primary">
+			                        Upload Image&hellip; <input id="file" name="file" type="file" style="display: none;">
+			                    </span>
+		                    </form>
+		                </label>
+		                <input type="text" class="form-control" readonly placeholder="(Optional)">
+              		</div>
+              		<br>
+            	</div>
+            </div>
          </div>
+
+
 
          <!-- Text area input for chords and lyrics -->
 		<div class="col-md-6 col-lg-6">

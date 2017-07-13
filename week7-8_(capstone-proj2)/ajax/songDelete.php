@@ -18,6 +18,14 @@
   $result = mysqli_query($conn,$sql);
   if($result) {
     if(mysqli_affected_rows($conn) > 0) {
+
+      // Delete photo
+      $filename = "../img/songs/song". $deleteid . "_pic.jpg";
+
+      if(is_file($filename)) {
+        unlink($filename);
+      }
+
       // Delete chord file
       $filename = "../json/songs/song" . $deleteid . "_chords.json";
   
