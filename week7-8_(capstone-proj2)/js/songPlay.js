@@ -38,12 +38,12 @@ $(document).ready(function() {
 });
 
 function readText(){
-  if($("#viewbtn").html()=='Read') {
+  if($("#viewbtn").html()=='Read as Text') {
     $("#songtext").show();
-    $("#viewbtn").html('Hide'); 
+    $("#viewbtn").html('Hide Text'); 
   } else {
     $("#songtext").hide();
-    $("#viewbtn").html('Read'); 
+    $("#viewbtn").html('Read as Text'); 
   } 
 }
 
@@ -144,6 +144,8 @@ function runText() {
 		var toggle = document.getElementById('togglebtn');
 		toggle.innerHTML = 'Restart';
     $("#stopbtn").hide();
+    $("#viewbtn").show();
+    $("#viewbtn").html('Read as Text');
 	}
 }
 
@@ -165,6 +167,8 @@ function toggleLyrics() {
         runText();
         toggle.innerHTML = 'Pause'; 
         $("#stopbtn").show();
+        $("#viewbtn").hide();
+        $("#songtext").hide()
         break;
 	    case 'Resume':
 	    	resume='yes';
@@ -184,6 +188,8 @@ function toggleLyrics() {
 	    	runText();
 	    	toggle.innerHTML = 'Pause'; 
         $("#stopbtn").show();
+        $("#viewbtn").hide();
+        $("#songtext").hide()
         break;
 	    default:
 	     break;
@@ -199,6 +205,8 @@ function stopSong(){
   cancelAnimationFrame(globalID);
   context.clearRect(clearX, clearY, canvas.width, clearH);
   $("#stopbtn").hide();
+  $("#viewbtn").show();
+  $("#viewbtn").html('Read as Text');
 }
 
 // Step function with callback

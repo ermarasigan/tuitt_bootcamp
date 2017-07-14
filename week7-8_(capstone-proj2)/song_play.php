@@ -79,15 +79,16 @@
 			
 			<?php
 				if(isset($_SESSION['username'])) {
-					echo "
-						<button title='Read chords and lyrics in text form' id='viewbtn' class='btn btn-default btn-info' type='submit' 
-							onclick='readText();'>Read</button>";
-
+					
 					echo "
 					<input type='hidden' id='getid' value='$playid'>";
 					if(isset($playbpm)){
 						echo "
 					<input type='hidden' id='getbpm' value='$playbpm'>";
+
+					echo "
+						<button title='Read chords and lyrics in text form' id='viewbtn' class='btn btn-info' type='submit'
+							onclick='readText();'>Read as Text</button>";
 					} else {
 						echo "
 					Chosen song does not exist on database";
@@ -104,7 +105,7 @@
 
 	<div class="row">
 		<div class="text-center">
-			<textarea id='songtext' rows='40' cols='40' spellcheck="false" disabled>
+			<textarea id='songtext' rows='40' cols='52' spellcheck="false" disabled>
 				<?php
 					if(isset($_SESSION['username'])) {
 					    foreach ($playlines as $playline) {
@@ -121,6 +122,12 @@
 	<canvas id="draw-pad" width="700" height="120">
 	</canvas>
 </main>
+
+<!-- Back to Top Button -->
+<button id="topbtn" title="Go to top">
+	<span class="glyphicon glyphicon-chevron-up">
+	</span>
+</button>
 
 <!-- Footer Partial (including javascript) -->
 <?php require_once "partials/_footer.php"; ?>

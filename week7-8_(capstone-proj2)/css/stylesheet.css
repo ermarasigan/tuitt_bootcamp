@@ -398,3 +398,38 @@ footer {
 	width: 200px; 
 	height: 200px;
 }
+
+#viewbtn[type='submit'] {
+	width: auto;
+}
+
+#songtext {
+	font-size: 1.8em;
+}
+
+/*Smaller font for mobile*/
+@media screen and (max-width: 768px) {
+	#songtext {
+	font-size: 0.75em;
+	}
+}
+
+#topbtn {
+    display: none; /* Hidden by default */
+    position: fixed; /* Fixed/sticky position */
+    bottom: 20px; /* Place the button at the bottom of the page */
+    right: 30px; /* Place the button 30px from the right */
+    z-index: 99; /* Make sure it does not overlap */
+    border: none; /* Remove borders */
+    outline: none; /* Remove outline */
+    background-color: rgba(308, 162, 14, 0.5); /* Set a background color */
+    color: white; /* Text color */
+    cursor: pointer; /* Add a mouse pointer on hover */
+    padding: 10px 17px; /* Some padding */
+    border-radius: 10px; /* Rounded corners */
+    font-size: 1.5em;
+}
+
+#topbtn:hover {
+    background-color: rgba(308, 162, 14, 1); /* Add a dark-grey background on hover */
+}

@@ -123,5 +123,11 @@
   </div>
 </section>
 
+<!-- Back to Top Button -->
+<button id="topbtn" title="Go to top">
+	<span class="glyphicon glyphicon-chevron-up">
+	</span>
+</button>
+
 <!-- Footer Partial (including javascript) -->
 <?php require_once "partials/_footer.php"; ?>
