@@ -117,6 +117,11 @@
 		</div>
 	</div>
 
+	<div id="songnext" class="row text-center">
+      <?php 
+        songNext();
+      ?>
+    </div>
 
 	<!-- Canvas where karaoke text is rendered -->
 	<canvas id="draw-pad" width="700" height="120">

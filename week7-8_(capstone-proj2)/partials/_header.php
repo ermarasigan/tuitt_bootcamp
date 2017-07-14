@@ -5,6 +5,7 @@
 <?php require_once "phpfun/acctLogout.php" ?>
 <?php require_once "phpfun/acctUpdate.php" ?>
 <?php require_once "phpfun/songShow.php"; ?>
+<?php require_once "phpfun/songNext.php"; ?>
 <?php require_once "phpfun/ukeTabs.php" ?>
 
 <!DOCTYPE html>

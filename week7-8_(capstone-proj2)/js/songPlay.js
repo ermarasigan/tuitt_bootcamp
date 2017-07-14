@@ -2,8 +2,6 @@
 
 // Initial state
 $(document).ready(function() {
-  $("#stopbtn").hide();
-  $("#songtext").hide();
   $("#draw-pad").width($(window).width()-30);
 
   // Get song id and bpm from song_play.php hidden inputs
@@ -40,10 +38,12 @@ $(document).ready(function() {
 function readText(){
   if($("#viewbtn").html()=='Read as Text') {
     $("#songtext").show();
-    $("#viewbtn").html('Hide Text'); 
+    $("#viewbtn").html('Hide Text');
+    $("#songnext").hide();
   } else {
     $("#songtext").hide();
     $("#viewbtn").html('Read as Text'); 
+    $("#songnext").fadeIn();
   } 
 }
 
@@ -145,6 +145,7 @@ function runText() {
 		toggle.innerHTML = 'Restart';
     $("#stopbtn").hide();
     $("#viewbtn").show();
+    $("#songnext").fadeIn();
     $("#viewbtn").html('Read as Text');
 	}
 }
@@ -190,6 +191,7 @@ function toggleLyrics() {
         $("#stopbtn").show();
         $("#viewbtn").hide();
         $("#songtext").hide()
+        $("#songnext").hide();
         break;
 	    default:
 	     break;
@@ -206,6 +208,7 @@ function stopSong(){
   context.clearRect(clearX, clearY, canvas.width, clearH);
   $("#stopbtn").hide();
   $("#viewbtn").show();
+  $("#songnext").fadeIn();
   $("#viewbtn").html('Read as Text');
 }
 

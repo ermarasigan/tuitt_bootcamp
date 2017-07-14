@@ -431,5 +431,17 @@ footer {
 }
 
 #topbtn:hover {
-    background-color: rgba(308, 162, 14, 1); /* Add a dark-grey background on hover */
+    background-color: rgba(308, 162, 14, 1); 
 }
+
+#songnext {
+	color: white;
+	text-shadow: 1px 1px grey;
+}
+
+#songnext,
+#stopbtn,
+#songtext {
+	display: none;
+}
+
