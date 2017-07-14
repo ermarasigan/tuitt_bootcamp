@@ -43,7 +43,9 @@ function readText(){
   } else {
     $("#songtext").hide();
     $("#viewbtn").html('Read as Text'); 
-    $("#songnext").fadeIn();
+    if($('#togglebtn').html() == 'Restart') {
+      $("#songnext").fadeIn();
+    }
   } 
 }
 
