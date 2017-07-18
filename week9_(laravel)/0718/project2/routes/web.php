@@ -17,7 +17,9 @@ Route::get('/', function () {
 
 Route::get('/home', 'TaskController@showTasks');
 
-Route::group(['middleware' => 'auth'], function(){
+// Route::group(['middleware' => 'auth'], function(){
+Route::group(['middleware' => 'App\Http\Middleware\AdminMiddleware'],
+ function(){
 	Route::post('/create', 'TaskController@createTask');
 	Route::get('/home/delete/{id}', 'TaskController@deleteTask');
 	Route::get('/home/edit/{id}', 'TaskController@editTask');
