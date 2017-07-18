@@ -21,10 +21,12 @@
 				  			<div class="form-group">
 				  				<input type="text" name="name" placeholder="Task name" class="form-control"></input>
 				  			</div>
+				  			@if(Auth::user() && Auth::user()->role == 'admin')
 						  	<button type="submit" class="btn btn-default">
 									<span class="glyphicon glyphicon-plus"></span>
 									Add Task
 							</button>
+							@endif
 						</div>
 						<div class="col-lg-5">
 				  			<div class="form-group">
@@ -58,7 +60,7 @@
 				        	<td>{{ $task->name }}</td>
 				        	<td>{{ $task->description }}</td>
 					        <td>
-					  			@if(Auth::user())
+					  			@if(Auth::user() && Auth::user()->role == 'admin')
 					        	<a href='{{ url("/home/edit/$task->id") }}'><button class="btn btn-warning">Edit</button></a>
 								<a href='{{ url("/home/delete/$task->id") }}'><button class="btn btn-danger">Delete</button></a>
 								@endif
