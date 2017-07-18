@@ -19,19 +19,18 @@
 						</div>
 				  		<div class="col-lg-4">
 				  			<div class="form-group">
-				  				<input type="text" name="name" value="{{ $task->name }}" class="form-control"></input>
+				  				<input type="text" name="name" value="{!! $task->name !!}" class="form-control"></input>
 				  			</div>
-						  	<button type="submit" class="btn btn-default">
-									<span class="glyphicon glyphicon-edit"></span>
+						  	<button type="submit" class="btn btn-primary">
 									Update Task
 							</button>							
 						</div>
 						<div class="col-lg-5">
 				  			<div class="form-group">
-				  				<input type="text" name="description" value="{{ $task->description }}" class="form-control"></input>
+				  				<input type="text" name="description" value="{!! $task->description !!}" class="form-control"></input>
 				  			</div>
 				  			<a href="\home">
-							<button type="submit" class="btn btn-default">
+							<button type="submit" class="btn btn-info">
 									Back
 							</button>
 							</a>

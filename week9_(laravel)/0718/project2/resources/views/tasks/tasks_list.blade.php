@@ -22,8 +22,7 @@
 				  				<input type="text" name="name" placeholder="Task name" class="form-control"></input>
 				  			</div>
 				  			@if(Auth::user() && Auth::user()->role == 'admin')
-						  	<button type="submit" class="btn btn-default">
-									<span class="glyphicon glyphicon-plus"></span>
+						  	<button type="submit" class="btn btn-primary">
 									Add Task
 							</button>
 							@endif
@@ -57,8 +56,8 @@
 				    <tbody>
 				    	@foreach($tasks as $task)
 						<tr>
-				        	<td>{{ $task->name }}</td>
-				        	<td>{{ $task->description }}</td>
+				        	<td>{!! $task->name !!}</td>
+				        	<td>{!! $task->description !!}</td>
 					        <td>
 					  			@if(Auth::user() && Auth::user()->role == 'admin')
 					        	<a href='{{ url("/home/edit/$task->id") }}'><button class="btn btn-warning">Edit</button></a>
