@@ -29,8 +29,8 @@
 
                     <!-- Branding Image -->
                     <a class="navbar-brand" href="{{ url('/home') }}">
-                        {{-- {{ config('app.name', 'Laravel') }} --}}
-                        Tasks List
+                        {{ config('app.name', 'Laravel') }}
+                        {{-- Tasks List --}}
                     </a>
                 </div>
 
