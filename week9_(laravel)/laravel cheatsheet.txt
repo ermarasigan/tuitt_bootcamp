@@ -285,4 +285,72 @@
 		return back();
 	}
 
+19) Adding admin role
+
+	a) php artisan make:migration add_role_to_users_table --table=users
+
+	b) add new field in migration file (database/migration)
+	public function up()
+    	{
+        	Schema::table('users', function (Blueprint $table) {
+            	$table->string('role');
+        	});
+    	}
+	public function down()
+    	{
+       		Schema::table('users', function (Blueprint $table) {
+            	$table->dropColumn('role');
+        	});
+    	}
+
+	c) php artisan migrate
+
+	d) edit users in phpmyadmin, set role to 'admin'
+
+	e) php artisan make:middleware AdminMiddleware
+
+	f) (app/http/middleware)
+    		public function handle($request, Closure $next)
+    		{
+        		if ($request->user()->role != 'admin')
+        		{
+                	return back();
+        		}
+       			return $next($request)
+    		}
+
+	g) Update auth in routes\web.php
+		// Route::group(['middleware' => 'auth'], function(){
+		Route::group(['middleware' => 'App\Http\Middleware\AdminMiddleware'], 
+
+	h) In RegisterController
+		protected function create(array $data)
+    		{
+        	return User::create([
+            		'name' => $data['name'],
+            		'email' => $data['email'],
+            		'password' => bcrypt($data['password']),
+            		'role' => 'regular',
+        	]);
+    		}
+
+	i) In User.php (app\)
+		protected $fillable = [
+        	'name', 'email', 'password', 'role',
+    		];
+
+	j) In view tasks_list, hide buttons for regular users
+		@if(Auth::user() && Auth::user()->role == 'admin')
+  		<button type="submit" class="btn btn-default">
+			<span class="glyphicon glyphicon-plus"></span>
+			Add Task
+		</button>
+		@endif
+
+20) To render as HTML tags, replace {{ }} with <!! !!}
+	<td>{!! $task->name !!}</td>
+	<td>{!! $task->description !!}</td>
+	For example, add task <strong>BOLD</strong> <i>Italized</i>
+	
+
 
