@@ -352,5 +352,16 @@
 	<td>{!! $task->description !!}</td>
 	For example, add task <strong>BOLD</strong> <i>Italized</i>
 	
+21) Confirmation message after create task
+	a) Add to view
+	@section("addtask_panel")
+		@if(Session::has('message'))
+			<div class="alert alert-success">{{ Session::get('message') }}</div>
+		@endif
 
+	b) Add to Taskcontroller
+	$request->session()->flash('message','Task added successfully');
 
+22) Query to get latest, use either:
+	// $tasks = Task::orderBy('updated_at','desc')->get();
+    // $tasks = Task::latest()->get();

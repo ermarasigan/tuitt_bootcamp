@@ -7,6 +7,9 @@
 
 
 @section("addtask_panel")
+	@if(Session::has('message'))
+		<div class="alert alert-success text-center">{{ Session::get('message') }}</div>
+	@endif
 	<div class="col-lg-6 col-lg-offset-3">
 		<div class="panel panel-default ">
 			<div class="panel-heading">New Task</div>

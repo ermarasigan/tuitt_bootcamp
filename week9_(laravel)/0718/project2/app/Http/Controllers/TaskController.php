@@ -16,6 +16,10 @@ class TaskController extends Controller
     function showTasks(){
     	$title = 'Tasks List';
     	$tasks = Task::all();
+
+        //$tasks = Task::orderBy('updated_at','desc')->get();
+        // $tasks = Task::latest()->get();
+
    	 	return view('tasks/tasks_list', compact('title','tasks'));
     }
 
@@ -32,6 +36,8 @@ class TaskController extends Controller
 		$new_task->name = $name;
 		$new_task->description = $description;
 		$new_task->save();
+
+        $request->session()->flash('message','Task added successfully');
 
 		return back();
 	}
