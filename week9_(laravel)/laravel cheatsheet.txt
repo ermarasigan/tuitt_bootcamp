@@ -1,0 +1,288 @@
+1) Copy template
+
+2) Set up db environment
+
+.env
+	DB_DATABASE=project2
+	DB_USERNAME=root
+	DB_PASSWORD=
+
+	(reset server)
+
+3) Create database (cmd)
+
+	open xampp
+	cd users\day4\desktop\xampp\mysql\bin\
+  	mysql -u root
+	create database project2;
+
+3) Create migration file (bash)
+
+	php artisan make:migration 
+	createTasksTable --create=tasks
+
+4) Edit migration file (database\migration)
+
+	Schema::create('tasks', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('name');
+            $table->string('description');
+            $table->timestamps();
+        });
+
+5) Edit AppServiceProviders (app\provider)
+
+	use Schema;
+	public function boot()
+    	{
+        	Schema::defaultStringLength(191);
+    	}
+
+6) Create database in mysql (bash)
+
+	php artisan migrate
+	:rollback - if you want to undo migrate 
+
+7) MODEL for database (app\)
+
+
+	a) php artisan make:model Task -c
+
+	b) Define eloquent relationships in app\
+
+
+8) VIEW (resources\views)
+	
+	a) Put css in public\css
+
+	b) layout template
+		(..layout\master.blade.php)
+
+	c) extend layout
+		(..tasks\tasks_list.blade.php)
+
+
+9) CONTROLLER (app\http\controllers)
+
+	a)  php artisan make:controller TaskController
+
+	b) Edit controller (add model)
+	use App\Task;
+	
+	c) Edit controller (add function and point to view)
+	function showTasks(){
+    		$title = 'Tasks List';
+    		$tasks = Task::all();
+   	 	return view('tasks/tasks_list', compact('title','tasks'));
+    	}
+
+
+10) ROUTE (routes\web)
+
+	a) Get method to point to Controller function
+	Route::get('/home', 'TaskController@showTasks');
+	
+
+11) Serve laravel (bash)
+	
+	php artisan serve
+	http://127.0.0.1:8000
+
+12) Create task
+
+	a) Define Route (routes\web.php)
+	Route::post('/create', 'TaskController@CreateTask');
+
+	b) Define function in Controller (app\http\controllers)
+	function createTask(Request $request){
+		$new_task = new Task();
+		$new_task->name = $request->name;
+		$new_task->description = $request->description;
+		$new_task->save();
+
+		return redirect('/home');
+	}
+
+	c) Add form in View (resources\views)
+	<form method="POST" action="{{ url('/create') }}">
+	{{ csrf_field() }}
+	<div class="row">
+  		<div class="col-lg-3 text-right">
+		  	<span>Task</span>
+		</div>
+  		<div class="col-lg-4">
+  			<div class="form-group">
+  				<input type="text" name="name" 
+				placeholder="Task name" class="form-control"></input>
+  			</div>
+		  	<button type="submit" class="btn btn-default">
+					<span class="glyphicon glyphicon-plus"><span>
+					Add Task
+			</button>
+		</div>
+		<div class="col-lg-5">
+  			<div class="form-group">
+  				<input type="text" name="description" 
+				placeholder="Task description" class="form-control"></input>
+  			</div>
+		</div>
+	</div>
+	</form>
+	
+13) Delete Task
+
+	a) Define Route (routes\web.php)
+	Route::get('/home/delete/{id}', 'TaskController@deleteTask');
+
+	b) Define function in Controller (app\http\controllers)
+	function deleteTask($id){
+    		$task_tbd = Task::find($id);
+    		$task_tbd->delete();
+
+    		return back();
+    	}
+
+	c) Delete button in View (resources\views)	
+	@foreach($tasks as $task)
+		<tr>
+    			<td>{{ $task->name }}</td>
+    			<td>{{ $task->description }}</td>
+        		<td>
+				<a href='{{ url("/home/delete/$task->id") }}'>
+				<button class="btn btn-danger">Delete</button></a>
+			</td>
+		</tr>
+	@endforeach
+	
+14) Edit Task
+
+	a) Define Routes (routes\web.php)
+	Route::get('/home/edit/{id}', 'TaskController@editTask');
+	Route::post('/home/edit/{id}', 'TaskController@saveEditTask');
+
+	b) Define function in Controller (app\http\controllers)
+	function editTask($id){
+    	$task = Task::find($id);
+
+    	return view('tasks/edit_form',compact('task'));
+    	}
+
+    	function saveEditTask($id, Request $request){
+    		$task_tbe = Task::find($id);
+    		$task_tbe->name = $request->name;
+    		$task_tbe->description = $request->description;
+    		$task_tbe->save();
+
+    		return redirect('/home');
+    	}
+
+	c) Edit button in View (resources\views)
+	(tasks/tasks_list)	
+	<a href='{{ url("/home/edit/$task->id") }}'>
+		<button class="btn btn-warning">Edit</button>
+	</a>
+
+	d) Create another View for update
+	(tasks/edit_form)
+	<form method="POST" action='{{ url("/home/edit/$task->id") }}'>
+		{{ csrf_field() }}
+		<div class="row">
+	  		<div class="col-lg-3 text-right">
+			  	<span>Task</span>
+			</div>
+	  		<div class="col-lg-4">
+	  			<div class="form-group">
+	  				<input type="text" name="name" 
+					value="{{ $task->name }}" 
+					class="form-control"></input>
+	  			</div>
+			  	<button type="submit" class="btn btn-default">
+					<span class="glyphicon glyphicon-edit">
+					</span>
+					Update Task
+				</button>
+			</div>
+			<div class="col-lg-5">
+	  			<div class="form-group">
+	  				<input type="text" name="description" 
+					value="{{ $task->description }}" 
+					class="form-control"></input>
+	  			</div>
+			</div>
+		</div>
+	</form>
+
+15) Create login
+	php artisan make:auth
+
+	Following lines should be added in web.php
+		Auth::routes();
+		Route::get('/home', 'HomeController@index')->name('home');
+
+16) Add header from home.php to tasks_lists
+	@extends('layouts.app')
+
+	Add format to layout/master
+	link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
+
+17) Allowing only logged in users to perform actions
+
+	a) Add redirect to TaskController for all functions
+
+	 public function __construct()
+    	{
+        	$this->middleware('auth');
+    	}
+
+	b) or restrict just for one function in TaskController
+	
+	use Auth;
+    	function createTask(Request $request){
+    	if(Auth::user()){
+			$new_task = new Task();
+			$new_task->name = $request->name;
+			$new_task->description = $request->description;
+			$new_task->save();
+
+			// return redirect('/home');
+			return back();
+		} else {
+			return redirect('/login');
+		}
+	}
+
+	c) or don't Auth in TaskController but in routes/web.php
+		for multiple functions
+	Route::group(['middleware' => 'auth'], function(){
+	Route::post('/create', 'TaskController@createTask');
+	Route::get('/home/delete/{id}', 'TaskController@deleteTask');
+	Route::get('/home/edit/{id}', 'TaskController@editTask');
+	Route::post('/home/edit/{id}', 'TaskController@saveEditTask');
+	});
+
+	d) Hiding buttons when not logged in
+	@if(Auth::user())
+		<a href='{{ url("/home/edit/$task->id") }}'><button class="btn btn-warning">Edit</button></a>
+		<a href='{{ url("/home/delete/$task->id") }}'><button class="btn btn-danger">Delete</button></a>
+	@endif
+
+18) Add input validation in TaskController
+	function createTask(Request $request){
+    	
+        $name = $request->name;
+        $description = $request->description;
+
+        $rules = ['name'=>'required'
+                 ,'description'=>'required'];
+        $this->validate($request,$rules);
+
+		$new_task = new Task();
+		$new_task->name = $name;
+		$new_task->description = $description;
+		$new_task->save();
+
+		return back();
+	}
+
+
