@@ -1,3 +1,5 @@
+(project2 7/18)
+
 1) Copy template
 
 2) Set up db environment
@@ -365,3 +367,290 @@
 22) Query to get latest, use either:
 	// $tasks = Task::orderBy('updated_at','desc')->get();
     // $tasks = Task::latest()->get();
+
+
+
+(project 3 07/19)
+
+1) Copy template
+
+2) Set up db environment
+
+.env
+	DB_DATABASE=project3
+	DB_USERNAME=root
+	DB_PASSWORD=
+
+	(reset server)
+
+3) Create database (cmd)
+
+	open xampp
+	cd users\day4\desktop\xampp\mysql\bin\
+  	mysql -u root
+	create database project3;
+
+4) Edit AppServiceProviders (app\provider)
+
+	use Schema;
+	public function boot()
+    	{
+        	Schema::defaultStringLength(191);
+    	}
+
+5) Create database in mysql (bash)
+
+	php artisan migrate
+	:rollback - if you want to undo migrate 
+
+6) Adding avatar for users
+
+	a) php artisan make:migration add_avatar_to_users_table --table=users
+
+	b) add new field in migration file (database/migration)
+	public function up()
+    	{
+        	Schema::table('users', function (Blueprint $table) {
+            	$table->string('avatar');
+        	});
+    	}
+	public function down()
+    	{
+       		Schema::table('users', function (Blueprint $table) {
+            	$table->dropColumn('avatar');
+        	});
+    	}
+
+	c) php artisan migrate
+
+	d) php artisan make:seeder UsersTableSeeder
+
+	e) (database/seeds)
+	public function run()
+	{
+		$faker = Faker\Factory::create();
+
+		$limit = 20;
+
+		for ($i = 0; $i < $limit; $i++){
+			DB::table('users')->insert([
+				'name' => $faker->name,
+				'email' => $faker->unique()->email,
+				'password' => bcrypt('secret'),
+				'avatar' => $faker->imageUrl($width = 200, $height = 200),
+			]);
+		}
+	}
+
+	f) php artisan db:seed --class=UsersTableSeeder
+
+	g) In RegisterController
+		protected function create(array $data)
+    		{
+
+		$faker = Faker\Factory::create();
+
+        	return User::create([
+            		'name' => $data['name'],
+            		'email' => $data['email'],
+            		'password' => bcrypt($data['password']),
+            		'avatar' => $faker->imageUrl($width = 200, $height = 200),
+        	]);
+    		}
+
+	h) In User.php (app\)
+		protected $fillable = [
+        	'name', 'email', 'password', 'avatar',
+    		];
+
+7) MODEL for database (app\User)
+
+	User model already created by default [php artisan make:model User -c]
+
+	a) Define eloquent relationships in app\
+
+
+8) VIEW (resources\views)
+	
+	a) Put bootstrap css and js in public
+
+	b) layout template
+		(..layout\master.blade.php)
+
+	c) extend layout
+		(..users\users_list.blade.php)
+
+	@foreach($users as $user)
+		<div class="panel panel-default" style="width: 220; float: left; margin: 10px">
+
+			<div class="panel-body">
+				<img src="{{ $user->avatar }}">
+			</div>
+
+			<div class="panel-footer text-center">
+				<a href='{{ url("/home/profile/$user->id") }}'>{{ $user->name }}</a>
+			</div>
+
+		</div>
+	@endforeach
+
+
+9) CONTROLLER (app\http\controllers)
+
+	a)  php artisan make:controller UserController
+
+	b) Edit controller (add model)
+	use App\User;
+	
+	c) Edit controller (add function and point to view)
+	function showUsers(){
+    		$title = 'Tasks List';
+    		$users = User::all();
+   	 	return view('users/users_list', compact('title','users'));
+    	}
+
+
+10) ROUTE (routes\web)
+
+	a) Get method to point to Controller function
+	Route::get('/home', 'UserController@showUsers');
+	
+
+11) Serve laravel (bash)
+	
+	php artisan serve
+	http://127.0.0.1:8000
+
+12) Profile page per user
+
+	a) Define Routes (routes\web.php)
+	Route::get('/home/profile/{id}', 'UserController@userProfile');
+
+	b) Define function in Controller (app\http\controllers)
+
+	function userProfile($id){
+    		$title = 'Users List';
+		$user = User::find($id);
+
+		return view('users/user_profile',compact('title','user'));
+	}
+
+	c) Display profile in View (resources\views)
+
+	<div class = "panel panel-default">
+		<div class="panel-body">
+			<div class="text-center">{{ $user->name }}</div>
+			<figure class="text-center">
+				<img src="{{ $user->avatar }}">
+			</figure>
+		</div>
+		<div class="panel-footer text-center">
+			<a href='{{ url("/home") }}'>Home</a>
+		</div>
+	</div>
+
+13) Create friend request table (Friends)
+
+	a) Create migration file (bash)
+
+		php artisan make:migration createFriendsTable --create=friends
+
+	b) Edit migration file (database\migration)
+
+		Schema::create('tasks', function (Blueprint $table) {
+            		$table->increments('id');
+            		$table->integer('from_user');
+            		$table->integer('to_user');
+	    		$table->string('status');
+            		$table->timestamps();
+        	});
+
+	c) Create database in mysql (bash)
+
+		php artisan migrate
+		:rollback - if you want to undo migrate 
+
+	d) MODEL for database (app\)
+
+		php artisan make:model Friend -c
+
+	e) Define eloquent relationships in app\
+
+14) Create login
+
+	a) php artisan make:auth
+		(web.php)
+		// Route::get('/home', 'HomeController@index')->name('home');
+	
+	b) Add header from home.php to views
+		@extends('layouts.app')
+
+	   Rename brand in .env
+		APP_NAME="Friendface"
+
+	   Add format to layout/master
+		link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
+
+	c) Allow only logged in users to perform actions
+		Route::group(['middleware' => 'auth'], function(){
+			Route::get('/home/profile/{id}', 'UserController@userProfile');
+		});
+
+	d) Hide buttons when not logged in
+	@if(Auth::user())
+		<a href='{{ url("/home/edit/$task->id") }}'><button class="btn btn-warning">Edit</button></a>
+		<a href='{{ url("/home/delete/$task->id") }}'><button class="btn btn-danger">Delete</button></a>
+	@endif
+
+15) Default avatar on Register
+
+	a) RegisterController
+	// $faker = Faker\Factory::create();
+
+        return User::create([
+            'name' => $data['name'],
+            'email' => $data['email'],
+            'password' => bcrypt($data['password']),            
+            // 'avatar' => $faker->imageUrl($width = 200, $height = 200),
+            'avatar' => 'http://lorempixel.com/200/200',
+        ]);
+
+	b) App\User
+
+	protected $fillable = [
+        	'name', 'email', 'password', 'avatar',
+    	];
+
+
+16) Add to Friend
+
+	
+	a) Define Routes (routes\web.php)
+	Route::post('/home/profile/{id}', 'UserController@addFriend');
+
+	b) Define function in Controller (app\http\controllers)
+
+	use Illuminate\Support\Facades\DB;
+
+	function addFriend(Request $request){
+		$new_friend = new Friend();
+		$new_friend->from_user 	= $request->from_user;
+		$new_friend->to_user 	= $request->to_user;
+		$new_friend->status	= 'P'
+		$new_task->save();
+
+		return redirect('/home');
+	}
+
+	c) Add friend button in View (resources\views)
+
+	@if(Auth::user() && Auth::user()->id != $user->id)
+	<form method="POST" class="text-center" style="margin-top: 10px;">
+		{{ csrf_field() }}
+	      	<button type="submit" class="btn btn-default">Add to Friend</button>
+	      	<input type="hidden" name="from_user" value={{Auth::user()->id}}></input>
+	      	<input type="hidden" name="to_user" value={{$user->id}}></input>
+	</form>
+	@endif
+

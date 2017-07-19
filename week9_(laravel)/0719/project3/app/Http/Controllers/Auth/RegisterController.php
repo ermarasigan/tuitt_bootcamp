@@ -63,12 +63,14 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
 
-        $faker = Faker\Factory::create();
+        // $faker = Faker\Factory::create();
 
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
-            'password' => bcrypt($data['password']),
+            'password' => bcrypt($data['password']),            
+            // 'avatar' => $faker->imageUrl($width = 200, $height = 200),
+            'avatar' => 'http://lorempixel.com/200/200',
         ]);
     }
 }
