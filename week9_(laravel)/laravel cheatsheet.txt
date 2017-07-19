@@ -625,13 +625,13 @@
 
 16) Add to Friend
 
-	
 	a) Define Routes (routes\web.php)
-	Route::post('/home/profile/{id}', 'UserController@addFriend');
+	Route::post('/home/add/{id}', 'UserController@addFriend');
 
 	b) Define function in Controller (app\http\controllers)
 
-	use Illuminate\Support\Facades\DB;
+	use App\User;
+	use App\Friend;
 
 	function addFriend(Request $request){
 		$new_friend = new Friend();
@@ -646,7 +646,7 @@
 	c) Add friend button in View (resources\views)
 
 	@if(Auth::user() && Auth::user()->id != $user->id)
-	<form method="POST" class="text-center" style="margin-top: 10px;">
+	<form method="POST"  action='{{ url("/home/add/$user->id") }}' class="text-center" style="margin-top: 10px;">
 		{{ csrf_field() }}
 	      	<button type="submit" class="btn btn-default">Add to Friend</button>
 	      	<input type="hidden" name="from_user" value={{Auth::user()->id}}></input>
@@ -654,3 +654,74 @@
 	</form>
 	@endif
 
+17) Confirm Friend Request
+
+	a) Define Routes (routes\web.php)
+	Route::post('/home/confirm/{id}','UserController@confirmFriend');
+
+	b) Define function in Controller (app\http\controllers)
+	
+	use Illuminate\Support\Facades\DB;
+
+	function confirmFriend(Request $request){
+		$from_user 	= $request->from_user;
+		$to_user 	= $request->to_user;
+
+    	$friend_tba = DB::table('friends')
+			->where([
+    			['from_user', '=', $from_user],
+    			['to_user', '=', $to_user],
+				])
+            	->update(['status' => 'A']);
+
+    		return redirect('/home');
+	}
+
+	c) Confirm friend button in View (resources\views)
+	<form method="POST" action='{{ url("/home/confirm/$user->id") }}' 
+	class="text-center" style="margin-top: 10px;">
+		{{ csrf_field() }}
+	      <button type="submit" class="btn btn-default">Confirm</button>
+	      <input type="hidden" name="from_user" value={{$pending->id}}></input>
+	      <input type="hidden" name="to_user" value={{Auth::user()->id}}></input>
+	</form>
+
+
+18) Delete Friend Request
+
+	a) Define Routes (routes\web.php)
+	Route::post('/home/delete/{id}','UserController@deleteFriend');
+
+	b) Define function in Controller (app\http\controllers)
+	
+	use Illuminate\Support\Facades\DB;
+
+	function deleteFriend(Request $request){
+		$from_user 	= $request->from_user;
+		$to_user 	= $request->to_user;
+
+    		$friend_tba = DB::table('friends')
+			->where([
+    			['from_user', '=', $from_user],
+    			['to_user', '=', $to_user],
+				])
+           	->update(['status' => 'D']);
+
+    		return redirect('/home');
+	}
+
+	c) Delete friend button in View (resources\views)
+
+	<form method="POST" action='{{ url("/home/delete/$user->id") }}' 
+	class="text-center" style="margin-top: 10px;">
+		{{ csrf_field() }}
+	      <button type="submit" class="btn btn-default">Confirm</button>
+	      <input type="hidden" name="from_user" value={{$pending->id}}></input>
+	      <input type="hidden" name="to_user" value={{Auth::user()->id}}></input>
+	</form>
+
+19) Hide Add Friend when already requested
+
+	a) UserController
+		use DB;
+		use Auth;

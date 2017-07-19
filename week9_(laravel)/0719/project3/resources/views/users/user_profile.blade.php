@@ -16,11 +16,13 @@
 						<img style="border-radius: 20px" src="{{ $user->avatar }}">
 					</figure>
 					@if(Auth::user() && Auth::user()->id != $user->id)
-					<form method="POST" class="text-center" style="margin-top: 10px;">
+					<form method="POST" action='{{ url("/home/add/$user->id") }}' class="text-center" style="margin-top: 10px;">
 						{{ csrf_field() }}
+						@if(!$ispend)
 					      <button type="submit" class="btn btn-default">Add to Friend</button>
 					      <input type="hidden" name="from_user" value={{Auth::user()->id}}></input>
 					      <input type="hidden" name="to_user" value={{$user->id}}></input>
+					    @endif
 					</form>
 					@endif
 				</div>
@@ -31,31 +33,54 @@
 			</div>
 		</div>
 	</div>
-	<h2 class="text-center">Pending Requests</h2>
 	@foreach($pendings as $pending)
 		@if(Auth::user() && Auth::user()->id == $pending->to_user)
+
 		
 			<div class="panel panel-default" style="width: 220; float: left; margin: 10px">
+
+				<h3 class="text-center">Pending Request</h3>
 
 				<div class="panel-body">
 					<div class="text-center">{{ $pending->name }}</div>
 					<img style="border-radius: 20px;" src="{{ $pending->avatar }}">
-
 					
-						<form method="POST" class="text-center" style="margin-top: 10px;">
-							{{ csrf_field() }}
-						      <button type="submit" class="btn btn-default">Confirm</button>
-						      <button type="submit" class="btn btn-default">Delete</button>
-						      <input type="hidden" name="from_user" value={{Auth::user()->id}}></input>
-						      <input type="hidden" name="to_user" value={{$user->id}}></input>
-						</form>
+					<form method="POST" action='{{ url("/home/confirm/$user->id") }}' class="text-center" style="margin-top: 10px;">
+						{{ csrf_field() }}
+					      <button type="submit" class="btn btn-default">Confirm</button>
+					      <input type="hidden" name="from_user" value={{$pending->id}}></input>
+					      <input type="hidden" name="to_user" value={{Auth::user()->id}}></input>
+					</form>
+					<form method="POST" action='{{ url("/home/delete/$user->id") }}' class="text-center" style="margin-top: 10px;">
+						{{ csrf_field() }}
+					      <button type="submit" class="btn btn-default">Delete</button>
+					      <input type="hidden" name="from_user" value={{$pending->id}}></input>
+					      <input type="hidden" name="to_user" value={{Auth::user()->id}}></input>
+					</form>
 					
 				</div>
+			</div>
+		@endif
+	@endforeach
+	@foreach($approveds as $approved)
+		@if(Auth::user() && Auth::user()->id == $approved->to_user)
 
-				{{-- <div class="panel-footer text-center">
-					<a href='{{ url("/home/profile/$pending->id") }}'>{{ $pending->name }}</a>
-				</div> --}}
+			<div class="panel panel-default" style="width: 220; float: left; margin: 10px">
 
+				<h3 class="text-center">Approved Friend</h3>
+
+				<div class="panel-body">
+					<div class="text-center">{{ $approved->name }}</div>
+					<img style="border-radius: 20px;" src="{{ $approved->avatar }}">
+					
+					<form method="POST" action='{{ url("/home/delete/$user->id") }}' class="text-center" style="margin-top: 10px;">
+						{{ csrf_field() }}
+					      <button type="submit" class="btn btn-default">Delete</button>
+					      <input type="hidden" name="from_user" value={{$approved->id}}></input>
+					      <input type="hidden" name="to_user" value={{Auth::user()->id}}></input>
+					</form>
+					
+				</div>
 			</div>
 		@endif
 	@endforeach

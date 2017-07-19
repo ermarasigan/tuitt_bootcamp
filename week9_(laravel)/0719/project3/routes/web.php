@@ -19,7 +19,9 @@ Route::get('/home', 'UserController@showUsers');
 
 Route::group(['middleware' => 'auth'], function(){
 	Route::get('/home/profile/{id}', 'UserController@userProfile');
-	Route::post('/home/profile/{id}','UserController@addFriend');
+	Route::post('/home/add/{id}','UserController@addFriend');
+	Route::post('/home/confirm/{id}','UserController@confirmFriend');
+	Route::post('/home/delete/{id}','UserController@deleteFriend');
 });
 
 Auth::routes();
