@@ -10,16 +10,29 @@ use App\Friend;
 
 class UserController extends Controller
 {
+
     function showUsers(){
     	$title = 'Users List';
     	$users = User::all();
-   	 	return view('users/users_list', compact('title','users'));
+   	    // 	return view('users/users_list', compact('title','users'));
+        $connections = Auth::user()->sentRequests
+               ->merge(Auth::user()->rcvdRequests);
+
+        $pending_requests = Auth::user()->pendingRequests();
+
+        $friends = Auth::user()->friends();
+        
+        return view('users/users_list', compact('title','users','connections','pending_requests','friends'));
     }
 
     function userProfile($id){
     	$title = 'Users List';
 		$user = User::find($id);
 		$logged = Auth::user()->id;
+
+        $connections = Auth::user()->sentRequests
+               ->merge(Auth::user()->rcvdRequests);
+
 
 		$pendings = DB::table('friends')
             ->join('users', 'users.id', '=', 'friends.from_user')
@@ -58,7 +71,7 @@ class UserController extends Controller
 				])
             ->count();
 
-		return view('users/user_profile',compact('title','user','pendings','approveds','ispend','isfriend'));
+		return view('users/user_profile',compact('title','user','pendings','approveds','ispend','isfriend','connections'));
 	}
 
 	function addFriend(Request $request){

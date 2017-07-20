@@ -15,14 +15,14 @@
 					<figure class="text-center">
 						<img style="border-radius: 20px" src="{{ $user->avatar }}">
 					</figure>
-					@if(Auth::user() && Auth::user()->id != $user->id)
+					@if(Auth::user()->id != $user->id && !$connections->contains($user->id))
 					<form method="POST" action='{{ url("/home/add/$user->id") }}' class="text-center" style="margin-top: 10px;">
 						{{ csrf_field() }}
-						@if(!$ispend)
+						{{-- @if(!$ispend) --}}
 					      <button type="submit" class="btn btn-default">Add to Friend</button>
 					      <input type="hidden" name="from_user" value={{Auth::user()->id}}></input>
 					      <input type="hidden" name="to_user" value={{$user->id}}></input>
-					    @endif
+					    {{-- @endif --}}
 					</form>
 					@endif
 				</div>

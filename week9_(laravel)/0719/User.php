@@ -15,7 +15,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'avatar',
+        'name', 'email', 'password',
     ];
 
     /**
@@ -27,33 +27,35 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    function sentRequests(){
-        return $this->belongsToMany('App\User', 'friends', 'from_user', 'to_user');
+    function myRequests(){
+        return $this->belongsToMany('App\User', 'friend_requests', 'from', 'to');
     }
 
-    function rcvdRequests(){
-        return $this->belongsToMany('App\User', 'friends', 'to_user', 'from_user');
+    function theirRequests(){
+        return $this->belongsToMany('App\User', 'friend_requests', 'to', 'from');
     }
 
     function pendingRequests(){
-        return $this->rcvdRequests()->wherePivot('status',0)->get();
+        return $this->theirRequests()->wherePivot('status',0)->get();
     }
 
     function friends(){
-        return $this->rcvdRequests()->wherePivot('status',1)->get()->merge($this->sentRequests()->wherePivot('status',1)->get());
+        return $this->theirRequests()->wherePivot('status',1)->get()->merge($this->myRequests()->wherePivot('status',1)->get());
     }
 
     function addFriend(User $user){
-        $this->sentRequests()->attach($user->id);
+        $this->myRequests()->attach($user->id);
     }
 
     function acceptRequest($id){
-        $this->rcvdRequests()->where('from_user',$id)->first()->pivot->update([
+        $this->theirRequests()->where('from',$id)->first()->pivot->update([
                 'status' => 1,
             ]);
     }
 
     function declineRequest($id){
-        $this->rcvdRequests()->detach($id);
+        $this->theirRequests()->detach($id);
     }
+
+
 }
