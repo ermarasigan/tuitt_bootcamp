@@ -26,11 +26,12 @@ class BlogController extends Controller
 
             //Check if tag already exists
             $tag = Tag::where('name','=',$inputTag)->first(['id','name']);
-            if(isset($tag)){
+            $hasTag = Tag::where('name','=',$inputTag)->count();
 
+            if($hasTag){
                 // Check if tag is already associated to blog
-                $hasTag = $blog->tag()->where('tag_id', $tag->id)->exists();
-                if($hasTag){
+                $hasBlogTag = $blog->tag()->where('tag_id', $tag->id)->exists();
+                if($hasBlogTag){
                     return response()->json(['response' => 'tag exists']);
                 } else {
                     $blog->tag()->attach($tag->id);
@@ -45,12 +46,12 @@ class BlogController extends Controller
                 $new_tag = Tag::where('name','=',$inputTag)->first(['id']);
 
                 // Insert record to pivot row to associate tag with blog
-                $blog->tag()->attach($newtag->id);
-
+                $blog->tag()->attach($new_tag->id);
             }
-            // Output response to send to ajax
+            // // Output response to send to ajax
             return response()->json(['response' => 'success']);
         } 
+        // Reload page in ajax instead
    	 	// return redirect('/home');
     }
 }

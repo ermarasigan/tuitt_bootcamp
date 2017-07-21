@@ -7,42 +7,6 @@
 
 	<!-- Bootstrap -->
 	<link rel="stylesheet" type="text/css" href="{{ asset('css/bootstrap/bootstrap.min.css')}}">
-   <!-- jQuery library -->
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-
-	<!-- Latest compiled JavaScript -->
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
-	<script type="text/javascript">
-
-		$( document ).ready(function() {
-			token = $('#csrf').val();
-
-			$('.addTagBtn').click(function(){
-				// Save tag from input
-				var blogID = this.id;
-				var inputTag = $('#' + blogID).val();
-
-				$.post("addTag",
-	     		{
-	     			blogID 		: blogID,
-	     			inputTag 	: inputTag,
-	     			_token 		: token
-	     		},function(data){
-	     			if (typeof data.response != 'undefined'){
-	     				if(data.response == 'success'){
-	     					location.reload();
-	     				} else {
-	     					console.log(data.response)
-	     				}
-	     			} else {
-	     				console.log('no return')
-	     			}
-	     		});
-			});
-		});
-
-    </script>
 
 </head>
 <body>
@@ -106,6 +70,54 @@
 	<!-- Include all compiled plugins (below), or include individual files as needed -->{{-- 
     <script src="{{ asset('js/bootstrap.min.js') }}"></script> --}}
 
-     
+
+   <!-- jQuery library -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+	<!-- Latest compiled JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+	<script type="text/javascript">
+
+		$( document ).ready(function() {
+			token = $('#csrf').val();
+
+			$('.addTagBtn').click(function(){
+				// Save tag name from input
+				var blogID = this.id;
+				var inputTag = $('#' + blogID).val();
+
+				// Ajax function to add tag, post method
+	   			$.ajax({
+	   				url: "addTag",
+	   				method: "POST",
+	   				data: {
+	   					blogID 		: blogID,
+	     				inputTag 	: inputTag,
+	     				_token 		: token
+	   				},
+	   				success: function(data){
+		     			if (typeof data.response != 'undefined'){
+		     				if(data.response == 'success'){
+		     					location.reload();
+		     				} else {
+		     					console.log(data.response)	     		
+		     				}
+		     			} else {
+		     				console.log('no return')
+		     			}
+	   				},
+	   				error: function(response,data){
+	   					console.log(response)
+	   					console.log(data)
+	   				}
+	   			})
+			});
+		});
+
+    </script>
+
+
+
 </body>
 </html>

@@ -44,7 +44,7 @@ class User extends Authenticatable
     }
 
     function addFriend(User $user){
-        $this->sentRequests()->attach($user->id);
+        $this->sentRequests()->attach($user->id,['status','P']);
     }
 
     function acceptRequest($id){

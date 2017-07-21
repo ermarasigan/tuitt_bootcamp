@@ -232,31 +232,42 @@ maxNbChars = 500, $indexSize =
 
     d) In script section (view), define Add Tag function triggered by click
 
-    $( document ).ready(function() {
-        token = $('#csrf').val();
-        $('.addTagBtn').click(function(){
-            // Save tag from input
-            var blogID = this.id;
-            var inputTag = $('#' + blogID).val();
-            $.post("addTag",
-            {
-                blogID      : blogID,
-                inputTag    : inputTag,
-                _token      : token
-            },function(data){
-                if (typeof data.response != 'undefined'){
-                    if(data.response == 'success'){
-                        location.reload();
-                    } else {
-                        console.log(data.response)
+        $( document ).ready(function() {
+            token = $('#csrf').val();
+
+            $('.addTagBtn').click(function(){
+                // Save tag name from input
+                var blogID = this.id;
+                var inputTag = $('#' + blogID).val();
+
+                // Ajax function to add tag, post method
+                $.ajax({
+                    url: "addTag",
+                    method: "POST",
+                    data: {
+                        blogID      : blogID,
+                        inputTag    : inputTag,
+                        _token      : token
+                    },
+                    success: function(data){
+                        if (typeof data.response != 'undefined'){
+                            if(data.response == 'success'){
+                                location.reload();
+                            } else {
+                                console.log(data.response)              
+                            }
+                        } else {
+                            console.log('no return')
+                        }
+                    },
+                    error: function(response,data){
+                        console.log(response)
+                        console.log(data)
                     }
-                } else {
-                    console.log('no return')
-                }
+                })
             });
         });
-    });
-
+        
     e) In Route (web.php), point to controller function using post method
 
     Route::post('/addTag', 'BlogController@addTag');
@@ -264,17 +275,23 @@ maxNbChars = 500, $indexSize =
     f) Define addTag function in controller
 
     public function addTag(Request $request){
+
         $inputTag = $request->inputTag;
         $blogID = $request->blogID;
+
         if ($request->isMethod('post')){
+
             // Find the blog sent thru ajax
             $blog = Blog::find($blogID);
+
             //Check if tag already exists
             $tag = Tag::where('name','=',$inputTag)->first(['id','name']);
-            if(isset($tag)){
+            $hasTag = Tag::where('name','=',$inputTag)->count();
+
+            if($hasTag){
                 // Check if tag is already associated to blog
-                $hasTag = $blog->tag()->where('tag_id', $tag->id)->exists();
-                if($hasTag){
+                $hasBlogTag = $blog->tag()->where('tag_id', $tag->id)->exists();
+                if($hasBlogTag){
                     return response()->json(['response' => 'tag exists']);
                 } else {
                     $blog->tag()->attach($tag->id);
@@ -284,13 +301,16 @@ maxNbChars = 500, $indexSize =
                 $new_tag = new Tag();
                 $new_tag->name = $inputTag;
                 $new_tag->save();
+
                 // Find the new tag
                 $new_tag = Tag::where('name','=',$inputTag)->first(['id']);
+
                 // Insert record to pivot row to associate tag with blog
-                $blog->tag()->attach($newtag->id);
+                $blog->tag()->attach($new_tag->id);
             }
-            // Output response to send to ajax
+            // // Output response to send to ajax
             return response()->json(['response' => 'success']);
         } 
+        // Reload page in ajax instead
         // return redirect('/home');
     }
