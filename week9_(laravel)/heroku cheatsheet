@@ -1,0 +1,131 @@
+References: https://devcenter.heroku.com/articles/getting-started-with-laravel
+https://devcenter.heroku.com/articles/getting-started-with-php
+
+1) Signup with Heroku hosting site for free
+(Credit card is needed for verifying identity)
+https://devcenter.heroku.com/articles/getting-started-with-laravel
+
+
+2) Download and install Heroku CLI -> requires PC admin
+https://devcenter.heroku.com/articles/heroku-cli
+(Also, make sure that composer and git are installed)
+
+
+3) Open cmd and type the following to login using heroku credentials:
+	
+	heroku login
+
+> If this fails, edit environment variable in Control Panel
+	and add to Path the directory of Heroku install (C:/Program Files/Heroku/bin)
+
+
+4) In cmd, point to your project directory
+
+	cd xampp\htdocs\capstoneproject3
+
+
+5) In cmd, create Procfile to configure correct document root:
+
+	echo web: vendor/bin/heroku-php-apache2 public/ > Procfile
+	git add.
+	git commit -m "Procfile for Heroku"
+
+
+6) In cmd, create a new Heroku application and specify [sampleprojectname], 
+this will also become the url for the live website (sampleprojectname.herokuapp.com)
+
+	heroku create sampleprojectname
+
+
+7) In cmd, set laravel encryption key, you can get this from your local .env file
+	Sample APP_KEY: base64:nzj3sa+X3hU1O6V7HYkafq7UvnMPmp23A3hw39rxTNY=
+
+	heroku config:set APP_KEY=base64:nzj3sa+X3hU1O6V7HYkafq7UvnMPmp23A3hw39xTNY=
+
+
+8) In cmd, deploy code to heroku
+
+	git push heroku master
+
+
+9) Ensure that at least one instance of the app is running
+
+	heroku ps:scale web=1
+
+
+10) Open website by typing the following:
+
+	heroku open
+
+> At this point, errors are expected as database is not yet set up
+
+
+11) For debugging purposes, it is recommended to edit config/app.php
+	to be able to later view errors in cmd by typing 'heroku logs'
+	
+	// 'log' => env('APP_LOG', 'single'),
+	'log' => 'errorlog',
+
+> In cmd, push changes to heroku:
+	git add.
+	git commit -m "Procfile for Heroku"
+	git push heroku master
+
+
+12) DATABASE SETUP, add JawsDB MySQL as an addon in Heroku Dashboard
+Search add-ons at
+https://dashboard.heroku.com/apps/{INSERT PROJECT NAME}/resources
+
+> Choose free package Kitefin Shared, 
+(credit card info will be asked for identity verification)
+
+> Once JawsDB is added, connection setting are available
+https://dashboard.jawsdb.com/mysql/dashboard
+
+> Install portable Heidi SQL from above Heroku dashboard
+(So that there is no need to input PC admin password)
+
+> In localhost/phpmyadmin, export your project database to SQL file
+
+> Import above SQL file in HeidiSQL by loading (File > Load SQL File)
+and then right clicking on loaded SQL File, and choosing option RUN
+
+> JawsDB MySQL should now be populated
+
+> Save connection information in JawsDB database for use in next step
+(https://dashboard.jawsdb.com/mysql/dashboard)
+
+Connection String contains:
+mysql://username:password@host:port/databasename
+
+
+13) Configure variables for database in dashboard settings
+https://dashboard.heroku.com/apps/{INSERT PROJECT NAME}/settings
+
+> APP_KEY should now be defined from step 7
+	Config Var KEY: 	APP_KEY
+	Config Var VALUE:	base64:nzj3sa+X3hU1O6V7HYkafq7UvnMPmp23A3hw39rxTNY= (sample)
+
+> 	Config Var KEY: 	DB_DATABASE
+	Config Var VALUE:	databasename in Connection String
+
+> 	Config Var KEY: 	DB_HOST
+	Config Var VALUE:	host in Connection String
+
+> 	Config Var KEY: 	DB_PASSWORD
+	Config Var VALUE:	password in Connection String
+
+> 	Config Var KEY: 	DB_PORT
+	Config Var VALUE:	port in Connection String
+
+> 	Config Var KEY: 	DB_USERNAME
+	Config Var VALUE:	username in Connection String
+
+> 	Config Var KEY: 	JAWSDB_URL
+	Config Var VALUE:	Entire Connection String
+
+
+
+Credits to Sir Peejay for recommending Heroku,
+Sir Nico for discovering JawsDB,
+Ms Shane for testing alternate syntax
