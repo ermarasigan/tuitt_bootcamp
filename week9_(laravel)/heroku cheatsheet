@@ -125,6 +125,13 @@ https://dashboard.heroku.com/apps/{INSERT PROJECT NAME}/settings
 	Config Var VALUE:	Entire Connection String
 
 
+14) You can also link your Heroku app to a Github repo
+so that everytime you push in git (git push origin master),
+the changes are also applied to Heroku app (no need to git push heroku master)
+
+Connect app to github in Heroku dashboard
+https://dashboard.heroku.com/apps/{INSERT PROJECT NAME}/deploy/github
+
 
 Credits to Sir Peejay for recommending Heroku,
 Sir Nico for discovering JawsDB,
