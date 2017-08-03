@@ -84,17 +84,21 @@ https://dashboard.heroku.com/apps/{INSERT PROJECT NAME}/resources
 (credit card info will be asked for identity verification)
 
 > Once JawsDB is added, connection setting are available
+Click JawsDB in the addon section of Heroku
 https://dashboard.jawsdb.com/mysql/dashboard
+
+> In localhost/phpmyadmin, export your project database to SQL file
 
 > Install portable Heidi SQL from above Heroku dashboard
 (So that there is no need to input PC admin password)
 
-> In localhost/phpmyadmin, export your project database to SQL file
+> Create new session in HeidiSQL using connection settings from JawsDB
 
 > Import above SQL file in HeidiSQL by loading (File > Load SQL File)
 and then right clicking on loaded SQL File, and choosing option RUN
 
 > JawsDB MySQL should now be populated
+Refresh database in HeidiSQL
 
 > Save connection information in JawsDB database for use in next step
 (https://dashboard.jawsdb.com/mysql/dashboard)
@@ -110,6 +114,10 @@ https://dashboard.heroku.com/apps/{INSERT PROJECT NAME}/settings
 	Config Var KEY: 	APP_KEY
 	Config Var VALUE:	base64:nzj3sa+X3hU1O6V7HYkafq7UvnMPmp23A3hw39rxTNY= (sample)
 
+> JAWSDB_URL is now also defined
+ 	Config Var KEY: 	JAWSDB_URL
+	Config Var VALUE:	Entire Connection String
+
 > 	Config Var KEY: 	DB_DATABASE
 	Config Var VALUE:	databasename in Connection String
 
@@ -124,9 +132,6 @@ https://dashboard.heroku.com/apps/{INSERT PROJECT NAME}/settings
 
 > 	Config Var KEY: 	DB_USERNAME
 	Config Var VALUE:	username in Connection String
-
-> 	Config Var KEY: 	JAWSDB_URL
-	Config Var VALUE:	Entire Connection String
 
 
 14) You can also link your Heroku app to a Github repo
