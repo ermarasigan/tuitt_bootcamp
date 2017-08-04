@@ -32,7 +32,7 @@ https://devcenter.heroku.com/articles/heroku-cli
 5) In cmd, create Procfile to configure correct document root:
 
 	echo web: vendor/bin/heroku-php-apache2 public/ > Procfile
-	git add.
+	git add .
 	git commit -m "Procfile for Heroku"
 
 
