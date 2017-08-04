@@ -26,7 +26,8 @@ https://devcenter.heroku.com/articles/heroku-cli
 
 4) In cmd, point to your project directory
 
-	cd xampp\htdocs\capstoneproject3
+	cd /
+	cd users/day4/desktop/project	
 	git init
 
 5) In cmd, create Procfile to configure correct document root:
