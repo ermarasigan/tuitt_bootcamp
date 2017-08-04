@@ -51,7 +51,9 @@ this will also become the url for the live website (sampleprojectname.herokuapp.
 
 7) In cmd, set laravel encryption key, you can get this from your local .env file
 	Sample APP_KEY: base64:nzj3sa+X3hU1O6V7HYkafq7UvnMPmp23A3hw39rxTNY=
+	Sample Project Name: sampleprojectname
 
+	heroku git:remote -a sampleprojectname
 	heroku config:set APP_KEY=base64:nzj3sa+X3hU1O6V7HYkafq7UvnMPmp23A3hw39xTNY=
 
 
