@@ -18,6 +18,11 @@ https://devcenter.heroku.com/articles/heroku-cli
 > If this fails, edit environment variable in Control Panel
 	and add to Path the directory of Heroku install (C:/Program Files/Heroku/bin)
 
+> or go to C:/Program Files/Heroku/bin in cmd
+
+	cd /
+	cd Program Files/Heroku/bin
+
 
 4) In cmd, point to your project directory
 
@@ -39,6 +44,8 @@ this will also become the url for the live website (sampleprojectname.herokuapp.
 > Project name should be unique, unfortunately cmd does not return error that project name already exists
 	To make sure, that project name is not yet taken, go to https://dashboard.heroku.com/new-app
 	and type project name in the App Name search bar
+
+> If this fails, create app in Heroku dashboard
 
 
 7) In cmd, set laravel encryption key, you can get this from your local .env file
